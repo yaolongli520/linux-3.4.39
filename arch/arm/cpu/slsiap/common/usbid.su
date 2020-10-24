@@ -1,0 +1,2 @@
+usbid.c:12:6:CalUSBID	72	static
+usbid.c:55:6:GetUSBID	0	static

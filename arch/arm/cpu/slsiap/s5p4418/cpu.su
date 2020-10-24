@@ -1,0 +1,11 @@
+cpu.c:41:13:cpu_cache_initialization	0	static
+cpu.c:43:5:cleanup_before_linux	8	static
+cpu.c:90:6:enable_caches	0	static
+cpu.c:114:5:arch_cpu_init	8	static
+cpu.c:154:5:print_cpuinfo	8	static
+cpu.c:162:5:dram_init	0	static
+cpu.c:169:6:dram_init_banksize	0	static
+cpu.c:183:20:get_board_name	0	static
+cpu.c:188:6:gdt_reset	24	static
+cpu.c:256:5:arch_misc_init	0	static
+cpu.c:265:6:arch_preboot_os	0	static

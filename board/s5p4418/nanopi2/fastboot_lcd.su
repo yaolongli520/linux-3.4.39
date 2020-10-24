@@ -1,0 +1,6 @@
+fastboot_lcd.c:36:6:fboot_lcd_start	88	static
+fastboot_lcd.c:58:6:fboot_lcd_stop	0	static
+fastboot_lcd.c:63:6:fboot_lcd_part	32	static
+fastboot_lcd.c:74:6:fboot_lcd_down	32	static
+fastboot_lcd.c:85:6:fboot_lcd_flash	32	static
+fastboot_lcd.c:96:6:fboot_lcd_status	32	static

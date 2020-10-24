@@ -1,0 +1,12 @@
+cmd_arch/arm/lib/vectors.o := arm-linux-gcc -Wp,-MD,arch/arm/lib/.vectors.o.d  -nostdinc -isystem /opt/FriendlyARM/toolchain/4.9.3/lib/gcc/arm-cortexa9-linux-gnueabihf/4.9.3/include -Iinclude  -I/root/uboot_nanopi2/arch/arm/include -D__KERNEL__ -DCONFIG_SYS_TEXT_BASE=0x42C00000  -D__ASSEMBLY__ -g      -DCONFIG_ARM -D__ARM__          -mcpu=cortex-a9  -march=armv7-a  -ffunction-sections -fdata-sections -fno-common -ffixed-r9  -Wno-unused-but-set-variable -mno-unaligned-access -fno-short-enums -fstrict-aliasing  -I/root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module -I/root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/base -I/root/uboot_nanopi2/arch/arm/include/asm/arch-s5p4418 -I/root/uboot_nanopi2/arch/arm/cpu/slsiap/common -I/root/uboot_nanopi2/arch/arm/cpu/slsiap/devices -I/root/uboot_nanopi2/board/s5p4418/common -D__LINUX__ -DNX_RELEASE -D__SUPPORT_MIO_UBOOT__ -D__SUPPORT_MIO_UBOOT_CHIP_S5P4418__ -I/root/uboot_nanopi2/board/s5p4418/nanopi2/include -pipe     -c -o arch/arm/lib/vectors.o arch/arm/lib/vectors.S
+
+source_arch/arm/lib/vectors.o := arch/arm/lib/vectors.S
+
+deps_arch/arm/lib/vectors.o := \
+    $(wildcard include/config/sys/dv/nor/boot/cfg.h) \
+    $(wildcard include/config/spl/build.h) \
+    $(wildcard include/config/use/irq.h) \
+
+arch/arm/lib/vectors.o: $(deps_arch/arm/lib/vectors.o)
+
+$(deps_arch/arm/lib/vectors.o):

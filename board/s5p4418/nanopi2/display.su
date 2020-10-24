@@ -1,0 +1,3 @@
+display.c:88:13:nxp_platform_disp_init.isra.0	32	static
+display.c:154:13:bd_disp_lvds	320	static
+display.c:209:5:bd_display	248	static

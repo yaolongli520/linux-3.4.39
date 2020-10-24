@@ -1,0 +1,5 @@
+cmd_usbdown.c:204:13:nx_usb_write_in_fifo	8	static
+cmd_usbdown.c:662:13:nx_udc_int_hndlr	40	static
+cmd_usbdown.c:189:13:ResetCon	0	static
+cmd_usbdown.c:711:7:iUSBBOOT	24	static
+cmd_usbdown.c:824:5:do_usbdown	88	static

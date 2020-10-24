@@ -1,0 +1,9 @@
+lcds.c:91:13:s70_gpio_init	8	static
+lcds.c:113:13:s430_gpio_init	8	static
+lcds.c:107:13:hd101_gpio_init	8	static
+lcds.c:703:5:nanopi2_setup_lcd_by_id	0	static
+lcds.c:722:5:nanopi2_setup_lcd_by_name	32	static
+lcds.c:760:17:nanopi2_get_lcd	0	static
+lcds.c:765:13:nanopi2_get_lcd_name	0	static
+lcds.c:770:17:nanopi2_get_lcd_format	0	static
+lcds.c:775:5:nanopi2_get_lcd_density	0	static

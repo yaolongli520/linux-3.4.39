@@ -1,0 +1,1 @@
+cmd_board/s5p4418/nanopi2/built-in.o :=  arm-linux-ld.bfd     -r -o board/s5p4418/nanopi2/built-in.o board/s5p4418/nanopi2/board.o board/s5p4418/nanopi2/onewire.o board/s5p4418/nanopi2/lcds.o board/s5p4418/nanopi2/hwrev.o board/s5p4418/nanopi2/display.o board/s5p4418/nanopi2/fastboot_lcd.o board/s5p4418/nanopi2/my_lcd.o 

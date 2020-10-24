@@ -1,0 +1,4 @@
+hwrev.c:64:6:board_rev_init	24	static
+hwrev.c:76:6:board_show_rev	0	static
+hwrev.c:82:5:get_board_rev	0	static
+hwrev.c:87:13:get_board_name	0	static

@@ -1,0 +1,5 @@
+cmd_mmcparts.c:103:12:mmc_get_part_table_extended	568	static
+cmd_mmcparts.c:160:5:mmc_get_part_table	32	static
+cmd_mmcparts.c:171:5:mmc_make_part_table_extended	584	static
+cmd_mmcparts.c:241:5:mmc_make_part_table	600	static
+cmd_mmcparts.c:342:12:do_fdisk	160	static

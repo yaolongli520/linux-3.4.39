@@ -1,0 +1,8 @@
+onewire.c:52:22:crc8	0	static
+onewire.c:91:13:wait_loops	0	static
+onewire.c:169:12:onewire_i2c_do_request	24	static
+onewire.c:118:12:onewire_session	32	static
+onewire.c:216:6:onewire_init	16	static
+onewire.c:228:5:onewire_get_info	24	static
+onewire.c:256:5:onewire_get_lcd_id	0	static
+onewire.c:261:5:onewire_set_backlight	32	static

@@ -768,7 +768,6 @@ void	NX_DPC_SetClockSource( U32 ModuleIndex, U32 Index, U32 ClkSrc )
 
 	ReadValue &= ~CLKSRCSEL_MASK;
 	ReadValue |= ClkSrc << CLKSRCSEL_POS;
-
 //	pRegister->DPCCLKGEN[Index][0] = ReadValue;
 	WriteIO32(&pRegister->DPCCLKGEN[Index][0], ReadValue);
 }
@@ -838,7 +837,6 @@ void			NX_DPC_SetClockDivisor( U32 ModuleIndex, U32 Index, U32 Divisor )
 
 	ReadValue	&= ~CLKDIV_MASK;
 	ReadValue	|= (Divisor-1) << CLKDIV_POS;
-
 //	pRegister->DPCCLKGEN[Index][0] = ReadValue;
 	WriteIO32(&pRegister->DPCCLKGEN[Index][0], ReadValue);
 }
@@ -1214,7 +1212,6 @@ void			NX_DPC_SetClockOutDelay( U32 ModuleIndex, U32 Index, U32 delay )
 
 	ReadValue &= ~OUTCLKDELAY_MASK;
 	ReadValue |= (U32)delay << OUTCLKDELAY_POS;
-
 //	pRegister->DPCCLKGEN[Index][1] = ReadValue;
 	WriteIO32(&pRegister->DPCCLKGEN[Index][1], ReadValue);
 }
@@ -1346,7 +1343,6 @@ void	NX_DPC_SetDPCEnable( U32 ModuleIndex, CBOOL bEnb )
 
 	ReadValue	&=	~(INTPEND_MASK|DPCENB_MASK);
 	ReadValue	|=	(U32)bEnb << DPCENB_POS;
-
 //	pRegister->DPCCTRL0	=	ReadValue;
 	WriteIO32(&pRegister->DPCCTRL0, ReadValue);
 }
@@ -1659,10 +1655,11 @@ void	NX_DPC_SetMode( U32 ModuleIndex, NX_DPC_FORMAT format,
 
 	if( !bClipYC )	temp |= (U32)(1U<<YCRANGE_POS);
 	if( bSwapRB )	temp |= (U32)(1U<<SWAPRB_POS);
-
+	
 //	pRegister->DPCCTRL1 = temp;
 	WriteIO32(&pRegister->DPCCTRL1, temp);
-
+	printf("&pRegister->DPCCTRL1=%p temp=%08x\n",&pRegister->DPCCTRL1,
+	temp);
 	temp  = pRegister->DPCCTRL2;
 	temp &= (U32)~(PADCLKSEL_MASK | LCDTYPE_MASK );		// TFT or Video Encoder
 	temp  = (U32)(temp | (clock<<PADCLKSEL_POS));

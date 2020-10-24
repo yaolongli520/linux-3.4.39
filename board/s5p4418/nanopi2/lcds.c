@@ -14,6 +14,80 @@
 #include <asm/arch/display.h>
 #include <nxp-fb.h>
 
+
+/*GPIOxOUT */
+#define GPIOAOUT        (*(volatile unsigned *)0xC001A000)
+#define GPIOBOUT        (*(volatile unsigned *)0xC001B000)
+#define GPIOCOUT        (*(volatile unsigned *)0xC001C000)
+#define GPIODOUT        (*(volatile unsigned *)0xC001D000)
+#define GPIOEOUT        (*(volatile unsigned *)0xC001E000)
+
+/*GPIOxENB */
+#define GPIOAOUTENB      (*(volatile unsigned *)(0xC001A000 + 0x4))
+#define GPIOBOUTENB      (*(volatile unsigned *)(0xC001B000 + 0x4))
+#define GPIOCOUTENB      (*(volatile unsigned *)(0xC001C000 + 0x4))
+#define GPIODOUTENB      (*(volatile unsigned *)(0xC001D000 + 0x4))
+#define GPIOEOUTENB      (*(volatile unsigned *)(0xC001E000 + 0x4))
+
+
+/*GPIOx DETMODE0 2BIT*/
+#define GPIOADETMODE0  (*(volatile unsigned *)(0xC001A000 + 0x8)) 
+#define GPIOBDETMODE0  (*(volatile unsigned *)(0xC001B000 + 0x8)) 
+#define GPIOCDETMODE0  (*(volatile unsigned *)(0xC001C000 + 0x8)) 
+#define GPIODDETMODE0  (*(volatile unsigned *)(0xC001D000 + 0x8)) 
+#define GPIOEDETMODE0  (*(volatile unsigned *)(0xC001E000 + 0x8)) 
+
+/*GPIOx DETMODE1 2BIT*/
+#define GPIOADETMODE1  (*(volatile unsigned *)(0xC001A000 + 0xc)) 
+#define GPIOBDETMODE1  (*(volatile unsigned *)(0xC001B000 + 0xc)) 
+#define GPIOCDETMODE1  (*(volatile unsigned *)(0xC001C000 + 0xc)) 
+#define GPIODDETMODE1  (*(volatile unsigned *)(0xC001D000 + 0xc)) 
+#define GPIOEDETMODE1  (*(volatile unsigned *)(0xC001E000 + 0xc))
+
+/*GPIOx DETMODE1 2BIT*/
+#define GPIOAALTFN0  (*(volatile unsigned *)(0xC001A000 + 0x20)) 
+#define GPIOBALTFN0  (*(volatile unsigned *)(0xC001B000 + 0x20)) //0-15
+#define GPIOBALTFN1  (*(volatile unsigned *)(0xC001B000 + 0x24)) //16-31 
+#define GPIOCALTFN0  (*(volatile unsigned *)(0xC001C000 + 0x20)) 
+#define GPIOCALTFN1  (*(volatile unsigned *)(0xC001C000 + 0x24)) //16-31 
+#define GPIODALTFN0  (*(volatile unsigned *)(0xC001D000 + 0x20)) 
+#define GPIOEALTFN0  (*(volatile unsigned *)(0xC001E000 + 0x20))
+
+static void itop43_gpio_init(void )
+{
+	int i;
+
+	/* PVCLK */ //参数1 GPIO组号 参数2 下标 比如GPIOA A5 第二个参数是5
+	NX_GPIO_SetDriveStrength(PAD_GPIO_A, 0, 1);
+
+	/* RGB24 */
+	for (i = 1; i < 25; i++)
+		NX_GPIO_SetDriveStrength(PAD_GPIO_A, i, 2);
+
+	/* HS/VS/DE */
+	for (; i < 28; i++)
+		NX_GPIO_SetDriveStrength(PAD_GPIO_A, i, 1);
+	
+	//DISP --- GPIOC15  （ MD_RSTN ）功能0 
+	
+	GPIOCALTFN0 &= ~(0X3<<30);//清位
+	GPIOCALTFN0 |= (0X1<<30);//使得GPIOC15位GPIO模式
+	GPIOCOUTENB |=(1<<15);//设置GPIOC15输出模式
+
+	GPIOCALTFN1 &= ~(0X3<<24);//清位
+	GPIOCALTFN1 |=(0X0<<24);//使得GPIOC28位GPIO模式
+	GPIOCOUTENB |=(1<<28);//设置GPIOC28输出模式
+	
+	
+	GPIOCOUT |=(1<<15);//MD_RSTN 拉高
+	mdelay(10);
+	GPIOCOUT &=~(1<<15);//MD_RSTN 拉低
+	mdelay(20);
+	GPIOCOUT |=(1<<15);//MD_RSTN 拉高
+	mdelay(120);
+}
+
+
 static void s70_gpio_init(void)
 {
 	int i;
@@ -443,6 +517,34 @@ static struct nxp_lcd hvga_h43 = {
 	},
 };
 
+
+static struct nxp_lcd itop_43 = {
+	.width = 480,
+	.height = 272,
+	.p_width = 96,
+	.p_height = 54,
+	.bpp = 32,
+	.freq = 65,
+
+	.timing = {
+		.h_fp =  5,
+		.h_bp = 40,
+		.h_sw =  2,
+		.v_fp =  8,
+		.v_fpe = 1,
+		.v_bp =  8,
+		.v_bpe = 1,
+		.v_sw =  2,
+	},
+	.polarity = {
+		.rise_vclk = 0,
+		.inv_hsync = 1,
+		.inv_vsync = 1,
+		.inv_vden = 0,
+	},
+//	.gpio_init = itop43_gpio_init,
+};
+
 static struct nxp_lcd hvga_p43 = {
 	.width = 480,
 	.height = 272,
@@ -586,7 +688,7 @@ static struct {
 	{  31, "S430",	&wvga_s430,  180, 1, LCD_RGB  },
 	{   4, "W50",	&wvga_w50,     0, 0, LCD_RGB  },
 	{  -1, "U101A",	&wxga_hd101,   0, 1, LCD_VESA },
-
+	{  20, "ITOP43",&itop_43,    128,  1, LCD_RGB },//lyl
 	/* TODO: Testing */
 	{  15, "W101",	&wsvga_w101,   0, 1, LCD_RGB  },
 	{   5, "L80",	&vga_l80,      0, 1, LCD_RGB  },
@@ -625,6 +727,7 @@ int nanopi2_setup_lcd_by_name(char *str)
 	delim = strchr(str, ',');
 	if (delim)
 		*delim++ = '\0';
+	str = "H43";
 
 	if (!strncasecmp("HDMI", str, 4)) {
 		struct hdmi_config *cfg = &nanopi2_hdmi_config[0];

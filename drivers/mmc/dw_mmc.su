@@ -1,0 +1,6 @@
+dw_mmc.c:241:12:dwmci_setup_bus.part.3	16	static
+dw_mmc.c:301:13:dwmci_set_ios	16	static
+dw_mmc.c:335:12:dwmci_init	16	static
+dw_mmc.c:53:6:dwmci_prepare_data	16	dynamic
+dw_mmc.c:140:12:dwmci_send_cmd	24	static
+dw_mmc.c:376:5:add_dwmci	8	static

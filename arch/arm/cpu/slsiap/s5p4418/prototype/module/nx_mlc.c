@@ -1014,7 +1014,6 @@ void	NX_MLC_SetTransparency( U32 ModuleIndex, U32 layer, CBOOL bEnb, U32 color )
 		regvalue = pRegister->MLCRGBLAYER[layer].MLCCONTROL;
 			regvalue &= ~( TPENB_MASK | DIRTYFLAG_MASK );
 		regvalue |= (bEnb<<TPENB_POS);
-
 	//	pRegister->MLCRGBLAYER[layer].MLCCONTROL = regvalue;
 		WriteIO32(&pRegister->MLCRGBLAYER[layer].MLCCONTROL, regvalue);
 
@@ -1210,7 +1209,6 @@ void	NX_MLC_SetFormatRGB( U32 ModuleIndex, U32 layer, NX_MLC_RGBFMT format )
 
 		regvalue &= ~(FORMAT_MASK | DIRTYFLAG_MASK);
 		regvalue |= (U32)format;
-
 	//	pRegister->MLCRGBLAYER[layer].MLCCONTROL = regvalue;
 		WriteIO32(&pRegister->MLCRGBLAYER[layer].MLCCONTROL, regvalue);
 	}

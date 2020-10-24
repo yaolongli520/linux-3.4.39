@@ -1,0 +1,10 @@
+gpio_nxp.c:27:5:gpio_request	0	static
+gpio_nxp.c:32:5:gpio_free	0	static
+gpio_nxp.c:37:5:gpio_direction_input	8	static
+gpio_nxp.c:50:5:gpio_direction_output	16	static
+gpio_nxp.c:65:5:gpio_get_value	0	static
+gpio_nxp.c:76:5:gpio_set_value	8	static
+gpio_nxp.c:90:5:gpio_get_int_pend	0	static
+gpio_nxp.c:101:6:gpio_set_int_clear	0	static
+gpio_nxp.c:112:6:gpio_set_alt	0	static
+gpio_nxp.c:123:5:gpio_get_alt	0	static

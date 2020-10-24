@@ -1,0 +1,4 @@
+cmd.c:319:5:do_new_cmd	24	static
+cmd.c:145:6:setup_revision_tag	8	static
+cmd.c:163:13:setup_board_tags	0	static
+cmd.c:187:5:do_goImage	32	static

@@ -1,0 +1,84 @@
+include/autoconf.mk: /root/uboot_nanopi2/include/common.h \
+ include/config.h include/config_cmd_defaults.h include/config_defaults.h \
+ include/configs/s5p4418_nanopi2.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/arch-s5p4418/platform.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/arch-s5p4418/s5p4418.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/arch-s5p4418/s5p4418_irq.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_clkpwr.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/../base/nx_prototype.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/../base/nx_type.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/../base/nx_debug.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/../base/nx_chip.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/../base/nx_clockcontrol.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/../base/nx_bit_accessor.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/base/nx_type.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_clkgen.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_rstcon.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_tieoff.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/../base/nx_type.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_mcus.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_timer.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_alive.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_gpio.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_displaytop.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_disptop_clkgen.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_dualdisplay.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_mlc.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_dualdisplay.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_dpc.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_displaytop.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_mlc.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_dpc.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_lcdif.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_resconv.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_lvds.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_mipi.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_hdmi.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_ecid.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_i2c.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_i2s.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_sdmmc.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_ssp.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_rtc.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_mpegtsi.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_vip.h \
+ /root/uboot_nanopi2/arch/arm/cpu/slsiap/s5p4418/prototype/module/nx_wdt.h \
+ /root/uboot_nanopi2/board/s5p4418/common/cfg_type.h \
+ /root/uboot_nanopi2/board/s5p4418/nanopi2/include/cfg_gpio.h \
+ /root/uboot_nanopi2/board/s5p4418/nanopi2/include/cfg_main.h \
+ /root/uboot_nanopi2/board/s5p4418/nanopi2/include/cfg_mem.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/arch-s5p4418/hardware.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/arch-s5p4418/linux-types.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/config.h \
+ include/config_fallbacks.h include/config_uncmd_spl.h \
+ include/asm-offsets.h include/linux/bitops.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/types.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/bitops.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/proc-armv/system.h \
+ include/linux/types.h include/linux/posix_types.h include/linux/stddef.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/posix_types.h \
+ /work/target/toolchain/arm-anykav200-crosstool/usr/lib/gcc/arm-anykav200-linux-uclibcgnueabi/4.8.5/include/stdbool.h \
+ include/linux/string.h /root/uboot_nanopi2/arch/arm/include/asm/string.h \
+ include/linux/linux_string.h include/linux/stringify.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/ptrace.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/proc-armv/ptrace.h \
+ /work/target/toolchain/arm-anykav200-crosstool/usr/lib/gcc/arm-anykav200-linux-uclibcgnueabi/4.8.5/include/stdarg.h \
+ include/part.h include/ide.h include/common.h include/flash.h \
+ include/image.h include/compiler.h \
+ /work/target/toolchain/arm-anykav200-crosstool/usr/lib/gcc/arm-anykav200-linux-uclibcgnueabi/4.8.5/include/stddef.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/byteorder.h \
+ include/linux/byteorder/little_endian.h include/linux/compiler.h \
+ include/linux/compiler-gcc.h include/linux/compiler-gcc4.h \
+ include/linux/byteorder/swab.h include/linux/byteorder/generic.h \
+ include/lmb.h /root/uboot_nanopi2/arch/arm/include/asm/u-boot.h \
+ include/asm-generic/u-boot.h include/command.h include/linker_lists.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/global_data.h \
+ include/asm-generic/global_data.h include/linux/list.h \
+ include/linux/poison.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/mach-types.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/setup.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/u-boot-arm.h include/uuid.h \
+ include/vsprintf.h include/u-boot/crc.h include/net.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/cache.h \
+ /root/uboot_nanopi2/arch/arm/include/asm/system.h include/bootstage.h \
+ include/environment.h

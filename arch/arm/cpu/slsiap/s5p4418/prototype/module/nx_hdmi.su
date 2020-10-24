@@ -1,0 +1,13 @@
+nx_hdmi.c:47:6:NX_HDMI_GetReg	0	static
+nx_hdmi.c:59:6:NX_HDMI_SetReg	0	static
+nx_hdmi.c:81:7:NX_HDMI_Initialize	0	static
+nx_hdmi.c:99:6:NX_HDMI_GetNumberOfModule	0	static
+nx_hdmi.c:109:6:NX_HDMI_GetSizeOfRegisterSet	0	static
+nx_hdmi.c:120:6:NX_HDMI_SetBaseAddress	0	static
+nx_hdmi.c:132:7:NX_HDMI_GetBaseAddress	0	static
+nx_hdmi.c:144:6:NX_HDMI_GetPhysicalAddress	0	static
+nx_hdmi.c:161:7:NX_HDMI_OpenModule	0	static
+nx_hdmi.c:175:7:NX_HDMI_CloseModule	0	static
+nx_hdmi.c:189:7:NX_HDMI_CheckBusy	0	static
+nx_hdmi.c:205:5:NX_HDMI_GetResetNumber	40	static
+nx_hdmi.c:231:6:NX_HDMI_GetInterruptNumber	0	static

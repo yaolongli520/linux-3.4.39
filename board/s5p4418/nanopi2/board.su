@@ -1,0 +1,7 @@
+board.c:178:13:bd_gpio_init	672	static
+board.c:388:13:bd_update_env	1080	static
+board.c:309:5:board_mmc_bootdev	0	static
+board.c:475:5:board_early_init_f	56	static
+board.c:491:5:board_init	8	static
+board.c:540:6:bd_display_run	16	static
+board.c:578:5:board_late_init	24	static

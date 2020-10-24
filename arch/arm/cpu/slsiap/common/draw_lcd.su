@@ -1,0 +1,16 @@
+draw_lcd.c:53:13:PutPixel888To565	4	static
+draw_lcd.c:59:13:PutPixel888To888	0	static
+draw_lcd.c:68:13:PutPixel888To8888	0	static
+draw_lcd.c:74:13:ALPHAPixel888To565	4	static
+draw_lcd.c:82:13:ALPHAPixel888To888	0	static
+draw_lcd.c:91:13:ALPHAPixel888To8888	0	static
+draw_lcd.c:146:13:lcd_draw_text_eng0816	88	static
+draw_lcd.c:206:5:lcd_debug_init	24	static
+draw_lcd.c:272:6:lcd_set_back_color	0	static
+draw_lcd.c:278:6:lcd_set_alphablend	0	static
+draw_lcd.c:284:6:lcd_set_text_color	0	static
+draw_lcd.c:290:6:lcd_line_horizontal	40	static
+draw_lcd.c:308:6:lcd_line_vertical	40	static
+draw_lcd.c:326:6:lcd_fill_rectangle	48	static
+draw_lcd.c:349:5:lcd_draw_text	16	static
+draw_lcd.c:356:5:lcd_draw_string	184	static

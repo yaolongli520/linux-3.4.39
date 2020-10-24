@@ -114,7 +114,7 @@ static void nxp_platform_disp_init(struct nxp_lcd *lcd,
 		div *= timing->v_sw + timing->v_bp + timing->v_fp + lcd->height;
 		div *= lcd->freq ? : 60;
 		clk /= div;
-
+		printf("..clk=%d div=%d \n",clk,div);
 		vsync->pixel_clock_hz= div;
 		vsync->clk_src_lv0	= CFG_DISP_PRI_CLKGEN0_SOURCE;
 		vsync->clk_div_lv0	= clk;
@@ -208,6 +208,8 @@ static void bd_disp_hdmi(void)
 
 int bd_display(void)
 {
+	
+
 	enum lcd_format fmt = nanopi2_get_lcd_format();
 
 	if (fmt == LCD_RGB) {

@@ -1,0 +1,13 @@
+clock.c:334:21:pll_get_div	0	static
+clock.c:310:21:pll_get_rate.constprop	24	static
+clock.c:373:22:core_update_rate	8	static
+clock.c:461:13:clk_get	24	static
+clock.c:496:13:clk_get_sys	8	static
+clock.c:506:6:clk_put	0	static
+clock.c:511:15:clk_get_rate	0	static
+clock.c:536:6:clk_round_rate	80	static
+clock.c:630:5:clk_set_rate	16	static
+clock.c:659:5:clk_enable	4	static
+clock.c:710:6:clk_disable	0	static
+clock.c:754:13:nxp_clk_init	32	static
+clock.c:798:6:nxp_clk_print	32	static

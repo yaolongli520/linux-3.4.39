@@ -1,0 +1,6 @@
+s5p4418.c:39:6:nxp_set_bus_config	4	static
+s5p4418.c:436:6:nxp_periph_init	8	static
+s5p4418.c:470:6:nxp_cpu_init	48	static
+s5p4418.c:480:6:nxp_before_linux	0	static
+s5p4418.c:488:14:nxp_cpu_version	0	static
+s5p4418.c:499:6:nxp_print_cpuinfo	0	static

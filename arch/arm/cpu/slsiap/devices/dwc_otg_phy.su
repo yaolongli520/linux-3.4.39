@@ -1,0 +1,4 @@
+dwc_otg_phy.c:40:6:otg_clk_enable	0	static
+dwc_otg_phy.c:49:6:otg_clk_disable	0	static
+dwc_otg_phy.c:58:6:otg_phy_init	8	static
+dwc_otg_phy.c:98:6:otg_phy_off	8	static

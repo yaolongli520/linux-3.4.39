@@ -37,6 +37,8 @@
 #include <onewire.h>
 #include <nxp-fb.h>
 
+#include "my_lcd.h" //lyl
+
 #if defined(CONFIG_PMIC)
 #include <power/pmic.h>
 #endif
@@ -359,8 +361,9 @@ static void bd_lcd_init(void)
 	/* -1: onwire probe failed
 	 *  0: bad
 	 * >0: identified */
-
+	myid = 20;//@lyl
 	ret = nanopi2_setup_lcd_by_id(myid);
+	ret = 20;//lyl
 	if (myid <= 0 || ret != myid) {
 		printf("LCD  = N/A (%d)\n", myid);
 		nanopi2_setup_lcd_by_name("HDMI720P60");
@@ -489,7 +492,6 @@ int board_init(void)
 {
 	bd_lcd_init();
 	bd_mem_fixup();
-
 	DBGOUT("%s : done board init ...\n", CFG_SYS_BOARD_NAME);
 	return 0;
 }
@@ -538,10 +540,11 @@ static void auto_update(int io, int wait)
 void bd_display_run(char *cmd, int bl_duty, int bl_on)
 {
 	static int display_init = 0;
+	
 
 	if (!display_init) {
-		bd_display();
-
+		bd_display();//lyl 正常
+		//my_lcd_init();//lyl 7寸
 #if defined(CFG_LCD_PRI_PWM_CH)
 		pwm_init(CFG_LCD_PRI_PWM_CH, 0, 0);
 		pwm_config(CFG_LCD_PRI_PWM_CH,

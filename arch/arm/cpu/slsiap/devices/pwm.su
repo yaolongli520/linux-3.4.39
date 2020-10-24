@@ -1,0 +1,4 @@
+pwm.c:119:5:pwm_init	32	static
+pwm.c:137:5:pwm_config	72	static
+pwm.c:194:5:pwm_enable	8	static
+pwm.c:204:6:pwm_disable	0	static

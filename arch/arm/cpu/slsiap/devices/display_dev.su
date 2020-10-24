@@ -1,0 +1,13 @@
+display_dev.c:40:6:disp_lcd_device	0	static
+display_dev.c:54:6:disp_initialize	8	static
+display_dev.c:67:6:disp_topctl_reset	8	static
+display_dev.c:88:6:disp_syncgen_reset	8	static
+display_dev.c:109:6:disp_syncgen_init	8	static
+display_dev.c:118:6:disp_syncgen_enable	16	static
+display_dev.c:127:5:disp_syncgen_setup	104	static
+display_dev.c:213:6:disp_multily_init	8	static
+display_dev.c:223:6:disp_multily_enable	16	static
+display_dev.c:235:5:disp_multily_setup	64	static
+display_dev.c:278:5:disp_mlc_set_enable	40	static
+display_dev.c:304:5:disp_mlc_set_address	16	static
+display_dev.c:311:5:disp_mlc_wait_vsync	24	static

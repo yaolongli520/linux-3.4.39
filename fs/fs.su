@@ -1,0 +1,17 @@
+fs.c:48:19:fs_probe_unsupported	8	static
+fs.c:55:19:fs_ls_unsupported	0	static
+fs.c:60:19:fs_exists_unsupported	0	static
+fs.c:65:19:fs_read_unsupported	0	static
+fs.c:71:19:fs_write_unsupported	0	static
+fs.c:77:20:fs_close_unsupported	0	static
+fs.c:150:28:fs_get_info	0	static
+fs.c:206:13:fs_close	8	static
+fs.c:164:5:fs_set_blk_dev	32	static
+fs.c:215:5:fs_ls	16	static
+fs.c:229:5:fs_exists	8	static
+fs.c:242:5:fs_read	24	static
+fs.c:266:5:fs_write	24	static
+fs.c:285:5:do_load	32	static
+fs.c:360:5:do_ls	16	static
+fs.c:377:5:file_exists	8	static
+fs.c:386:5:do_save	32	static
