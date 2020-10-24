@@ -71,7 +71,7 @@ struct dht11 {
 	struct {s64 ts; int value; }	edges[DHT11_EDGES_PER_READ];
 };
 
-static int gpio = PAD_GPIO_B + 28;
+static int gpio = PAD_GPIO_B + 29;
 static unsigned char dht11_decode_byte(int *timing, int threshold)
 {
 	unsigned char ret = 0;
@@ -149,6 +149,9 @@ static int dht11_read_raw(struct iio_dev *iio_dev,
 {
 	struct dht11 *dht11 = iio_priv(iio_dev);
 	int ret;
+	static int io = 0;
+	if(!io) pr_emerg("dht11->gpio=%d lyl\n",dht11->gpio);
+	io = 1;
 
 	if (dht11->timestamp + DHT11_DATA_VALID_TIME < iio_get_time_ns()) {
 		dht11->completion.done = 0;
@@ -180,7 +183,8 @@ static int dht11_read_raw(struct iio_dev *iio_dev,
 		if (ret)
 			goto err;
 	}
-
+	pr_emerg("%d .... \n",__LINE__);
+	
 	ret = IIO_VAL_INT;
 	if (chan->type == IIO_TEMP)
 		*val = dht11->temperature;

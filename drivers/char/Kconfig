@@ -6,6 +6,8 @@ menu "Character devices"
 
 source "drivers/tty/Kconfig"
 
+source "drivers/char/rwlock/Kconfig"
+
 config DEVMEM
 	bool "Memory device driver"
 	default y

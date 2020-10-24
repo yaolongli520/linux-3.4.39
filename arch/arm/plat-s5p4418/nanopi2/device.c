@@ -591,12 +591,12 @@ static struct i2c_board_info __initdata ft5x0x_i2c_bdi = {
 #if defined(CONFIG_TOUCHSCREEN_GOODIX)
 #include <linux/platform_data/goodix_touch.h>
 
-#define	GOODIX_I2C_BUS		(2)
+#define	GOODIX_I2C_BUS		(1)
 
 static struct goodix_i2c_platform_data goodix_pdata = {
-	.gpio_irq		= CFG_IO_TOUCH_IRQ,
+	.gpio_irq		= (PAD_GPIO_C + 7),//CFG_IO_TOUCH_IRQ,
 	.irq_cfg		= 0,
-	.gpio_reset		= -1,
+	.gpio_reset		= (PAD_GPIO_C + 8),//-1,
 	.screen_max_x	= 1280,
 	.screen_max_y	= 800,
 	.pressure_max	= 255,
@@ -1455,17 +1455,78 @@ struct pl022_config_chip spi0_info = {
 	.clkdelay = SSP_FEEDBACK_CLK_DELAY_1T,
 };
 
+
+
 static struct spi_board_info spi_plat_board[] __initdata = {
+#if 0
 	[0] = {
-		.modalias        = "spidev",    /* fixup */
+		.modalias        = "spidev00",    /* fixup */
 		.max_speed_hz    = 3125000,     /* max spi clock (SCK) speed in HZ */
 		.bus_num         = 0,           /* Note> set bus num, must be smaller than ARRAY_SIZE(spi_plat_device) */
 		.chip_select     = 0,           /* Note> set chip select num, must be smaller than spi cs_num */
 		.controller_data = &spi0_info,
 		.mode            = SPI_MODE_3 | SPI_CPOL | SPI_CPHA,
 	},
+#endif
+        [0] = {
+                .modalias        = "my_spilcd",    /* fixup */
+                .max_speed_hz    = 50000000,     /* max spi clock (SCK) speed in HZ */
+                .bus_num         = 0,           /* Note> set bus num, must be smaller than ARRAY_SIZE(spi_plat_device) */
+                .chip_select     = 1,           /* Note> set chip select num, must be smaller than spi cs_num */
+                .controller_data = &spi0_info,
+                .mode            = SPI_MODE_0 | SPI_CPOL | SPI_CPHA,
+        },
+
+	
 };
 #endif
+
+#define CFG_SPI2_CS	(PAD_GPIO_C + 10)	
+
+static void mylcd_cs(u32 chipselect)
+{
+      if (nxp_soc_gpio_get_io_func( CFG_SPI2_CS ) != nxp_soc_gpio_get_altnum( CFG_SPI2_CS ))
+    nxp_soc_gpio_set_io_func( CFG_SPI2_CS, nxp_soc_gpio_get_altnum( CFG_SPI2_CS ));
+
+        nxp_soc_gpio_set_io_dir( CFG_SPI2_CS, 1);
+        nxp_soc_gpio_set_out_value( CFG_SPI2_CS , chipselect);
+
+}
+
+struct pl022_config_chip mylcd_info = {
+        /* available POLLING_TRANSFER, INTERRUPT_TRANSFER, DMA_TRANSFER */
+        .com_mode = CFG_SPI2_COM_MODE,
+        .iface = SSP_INTERFACE_MOTOROLA_SPI,
+        /* We can only act as master but SSP_SLAVE is possible in theory */
+        .hierarchy = SSP_MASTER,
+        /* 0 = drive TX even as slave, 1 = do not drive TX as slave */
+        .slave_tx_disable = 1,
+        .rx_lev_trig = SSP_RX_4_OR_MORE_ELEM,
+        .tx_lev_trig = SSP_TX_4_OR_MORE_EMPTY_LOC,
+        .ctrl_len = SSP_BITS_8,
+        .wait_state = SSP_MWIRE_WAIT_ZERO,
+        .duplex = SSP_MICROWIRE_CHANNEL_FULL_DUPLEX,
+  /*
+         * This is where you insert a call to a function to enable CS
+         * (usually GPIO) for a certain chip.
+         */
+        .cs_control = mylcd_cs,
+        .clkdelay = SSP_FEEDBACK_CLK_DELAY_1T,
+};
+
+
+
+//生成 SPI设备 spi_device
+static struct spi_board_info spi2_plat_board[] __initdata = {
+        [0] = {
+                .modalias        = "my_spilcd",    /* fixup */
+                .max_speed_hz    = 40000000,     /* max spi clock (SCK) speed in HZ */
+                .bus_num         = 2,           /* Note> set bus num, must be smaller than ARRAY_SIZE(spi_plat_device) */
+                .chip_select     = 0,           /* Note> set chip select num, must be smaller than spi cs_num */
+                .controller_data = &mylcd_info,
+                .mode            = SPI_MODE_0 | SPI_CPOL | SPI_CPHA,
+        },
+};
 
 /*------------------------------------------------------------------------------
  * DW MMC board config
@@ -1942,6 +2003,9 @@ void __init nxp_board_devices_register(void)
 	spi_register_board_info(spi_plat_board, ARRAY_SIZE(spi_plat_board));
 	printk("plat: register spidev\n");
 #endif
+
+//	spi_register_board_info(spi2_plat_board, ARRAY_SIZE(spi2_plat_board));
+//	printk("plat: register spidev lcd\n");
 
 #if defined(CONFIG_TOUCHSCREEN_GSLX680)
 	printk("plat: add touch(gslX680) device\n");

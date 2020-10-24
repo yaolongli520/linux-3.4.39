@@ -74,6 +74,12 @@ config FB_TFT_ST7789S
 	help
 	  Generic Framebuffer support for ST7789S
 
+config FB_TFT_ST7789V
+	tristate "FB driver for the ST7789V LCD Controller"
+	depends on FB_TFT
+	help
+	  Generic Framebuffer support for ST7789V
+
 config FB_TFT_ILI9481
 	tristate "FB driver for the ILI9481 LCD Controller"
 	depends on FB_TFT

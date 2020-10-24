@@ -44,6 +44,24 @@ static void s70_gpio_init(void)
 		nxp_soc_gpio_set_io_drv(PAD_GPIO_A + i, 1);
 }
 
+
+static void itop43_gpio_init(void)
+{
+	int drv , i;
+		drv = 3;
+
+	/* PVCLK */
+	nxp_soc_gpio_set_io_drv(PAD_GPIO_A + 0, 1);
+
+	/* RGB24 */
+	for (i = 1; i < 25; i++)
+		nxp_soc_gpio_set_io_drv(PAD_GPIO_A + i, 2);
+
+	/* HS/VS/DE */
+	for (; i < 28; i++)
+		nxp_soc_gpio_set_io_drv(PAD_GPIO_A + i, 1);
+}
+
 static void s702_gpio_init(void)
 {
 	int i;
@@ -223,6 +241,35 @@ static struct nxp_lcd wvga_s70d = {
 	},
 	.gpio_init = s702_gpio_init,
 };
+
+static struct nxp_lcd itop_43 = {
+        .width = 480,
+        .height = 272,
+        .p_width = 96,
+        .p_height = 54,
+        .bpp = 32,
+        .freq = 65,
+
+        .timing = {
+                .h_fp =  5,
+                .h_bp = 40,
+                .h_sw =  2,
+                .v_fp =  8,
+                .v_fpe = 1,
+                .v_bp =  8,
+                .v_bpe = 1,
+                .v_sw =  2,
+        },
+        .polarity = {
+                .rise_vclk = 0,
+                .inv_hsync = 1,
+                .inv_vsync = 1,
+                .inv_vden = 0,
+        },
+	.gpio_init = itop43_gpio_init,
+};
+
+
 
 #ifndef CONFIG_ANDROID
 static struct nxp_lcd hvga_h43 = {
@@ -623,7 +670,7 @@ static struct {
 	{ "X710",	&wsvga_x710, CTP_ITE7260 },
 	{ "S430",	&wvga_s430,  CTP_HIMAX   },
 	{ "K101",	&wxga_hd101, CTP_FT5X06  },
-
+	{ "ITOP43",     &itop_43,   1 },//lyl
 #ifndef CONFIG_ANDROID
 	{ "H43",	&hvga_h43,   0 },
 	{ "P43",	&hvga_p43,   0 },
@@ -646,6 +693,7 @@ static int __init nanopi2_setup_lcd(char *str)
 {
 	char *delim;
 	int i;
+	str = "ITOP43"; //lyl
 
 	delim = strchr(str, ',');
 	if (delim)

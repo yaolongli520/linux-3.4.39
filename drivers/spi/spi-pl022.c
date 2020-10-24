@@ -843,6 +843,32 @@ static void dma_callback(void *data)
 	tasklet_schedule(&pl022->pump_transfers);
 }
 
+static void timeout_callback(void *data)
+{
+	struct pl022 *pl022 = data;
+	struct spi_message *msg = pl022->cur_msg;
+	struct dma_chan *rxchan = pl022->dma_rx_channel;
+	struct dma_chan *txchan = pl022->dma_tx_channel;
+
+	BUG_ON(!pl022->sgt_rx.sgl);
+
+	dmaengine_terminate_all(rxchan);//终止DMA接收所有
+	dmaengine_terminate_all(txchan);//终止DMA发送所有
+
+	unmap_free_dma_scatter(pl022);
+
+	/* Update total bytes transferred */
+	msg->actual_length += pl022->cur_transfer->len;
+	if (pl022->cur_transfer->cs_change)
+		pl022->cur_chip->
+			cs_control(SSP_CHIP_DESELECT);
+
+	/* Move to next transfer */
+	msg->state = STATE_ERROR;
+	tasklet_schedule(&pl022->pump_transfers);
+}
+
+
 static void setup_dma_scatter(struct pl022 *pl022,
 			      void *buffer,
 			      unsigned int length,
@@ -1371,8 +1397,10 @@ static void pump_transfers(unsigned long data)
 	}
 	/* Flush the FIFOs and let's go! */
 	flush(pl022);
-
-	if (pl022->cur_chip->enable_dma && !(pl022->cur_transfer->len % 4) &&  (pl022->cur_transfer->len < 4096)) {		//bok add
+	//lyl
+	if (pl022->cur_chip->enable_dma && !(pl022->cur_transfer->len % 4))
+	 {  //bok add
+	//if (pl022->cur_chip->enable_dma && !(pl022->cur_transfer->len % 4) &&  (pl022->cur_transfer->len < 4096)) {		//bok add
 	//if (pl022->cur_chip->enable_dma) {
 		if (configure_dma(pl022)) {
 			dev_dbg(&pl022->adev->dev,
@@ -1407,8 +1435,10 @@ static void do_interrupt_dma_transfer(struct pl022 *pl022)
 		return;
 	}
 	/* If we're using DMA, set up DMA here */
-
-	if (pl022->cur_chip->enable_dma && !(pl022->cur_transfer->len % 4) &&  (pl022->cur_transfer->len < 4096)) {		//bok add
+	
+	if (pl022->cur_chip->enable_dma && !(pl022->cur_transfer->len % 4) )
+	{ //lyl
+	//if (pl022->cur_chip->enable_dma && !(pl022->cur_transfer->len % 4) &&  (pl022->cur_transfer->len < 4096)) {		//bok add
 //	if (pl022->cur_chip->enable_dma) {
 		/* Configure DMA transfer */
 		if (configure_dma(pl022)) {
@@ -1509,7 +1539,7 @@ static int pl022_transfer_one_message(struct spi_master *master,
 {
 	struct pl022 *pl022 = spi_master_get_devdata(master);
 	static int last_chip_id = 0;
-
+	unsigned long wait_time;
 	INIT_COMPLETION(pl022->xfer_completion);
 
 	/* Initial message state */
@@ -1530,18 +1560,22 @@ static int pl022_transfer_one_message(struct spi_master *master,
 		// printk("cur_id=%d last_id=%d\n", pl022->cur_chip->chip_id, last_chip_id);
 	}	
 	last_chip_id = pl022->cur_chip->chip_id;
-	
+	wait_time = DIV_ROUND_UP(pl022->cur_transfer->len,5486) + 6;
+	wait_time = DIV_ROUND_UP(wait_time,1000/HZ);	
+
 	if (pl022->cur_chip->xfer_type == POLLING_TRANSFER)
 		do_polling_transfer(pl022);
 	else
 		do_interrupt_dma_transfer(pl022);
 
-	if (!wait_for_completion_timeout(&pl022->xfer_completion, HZ)) {
-		printk("%s timeout\n", __func__);
-		writew(DISABLE_ALL_INTERRUPTS, SSP_IMSC(pl022->virtbase));
-		writew(CLEAR_ALL_INTERRUPTS, SSP_ICR(pl022->virtbase));
-		pl022->cur_msg->state = STATE_ERROR;
-		tasklet_schedule(&pl022->pump_transfers);
+
+	if (!wait_for_completion_timeout(&pl022->xfer_completion, wait_time)) {
+	//	printk("%s timeout\n", __func__);
+	//	writew(DISABLE_ALL_INTERRUPTS, SSP_IMSC(pl022->virtbase));
+	//	writew(CLEAR_ALL_INTERRUPTS, SSP_ICR(pl022->virtbase));
+	//	pl022->cur_msg->state = STATE_ERROR;
+	//	tasklet_schedule(&pl022->pump_transfers);
+		timeout_callback(pl022);
 	}
 	
 	return 0;
