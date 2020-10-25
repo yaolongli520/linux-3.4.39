@@ -5,6 +5,7 @@
 #include <sys/time.h>    
 #include <string.h>
 
+
 #include "mytime.h"
 
 using namespace std;
@@ -94,9 +95,12 @@ int set_time_time(char *t)
 }
 
 
+
+
 /*获取时间差*/
 struct timespec get_time_offset(struct timespec &prev,struct timespec &cur)
 {
+	
 	long int sec;
 	long int nsec;
 	struct timespec ret;
@@ -114,12 +118,15 @@ struct timespec get_time_offset(struct timespec &prev,struct timespec &cur)
 }
 
 
-
 //判断时间差是否大于 timeout
-int get_timeout(struct timespec &time,long int timeout)
+//发现漏洞 t 不能存储 1000000*5000 
+//换成 uint64_t ?? 
+//直接 time.tv_sec*1000000000 数会变大
+int get_timeout(struct timespec &time,uint64_t timeout)
 {
-	long int t = time.tv_sec*1000000000 + time.tv_nsec;
-	if(t > timeout)
+	uint64_t t = 1000000000*(uint64_t)time.tv_sec + time.tv_nsec;
+	timeout = timeout*1000000;
+	if(t > timeout) 	
 		return TIME_OUT;
 	return ON_TIME;
 }

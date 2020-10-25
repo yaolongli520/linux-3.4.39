@@ -9,9 +9,12 @@ set (SRC_SERVER
 	${PROJECT_SOURCE_DIR}/src/time/mytime.cpp
 	${PROJECT_SOURCE_DIR}/src/disk/disk.cpp  
 	${PROJECT_SOURCE_DIR}/src/io_ctrl/ioctrl.cpp  
+	${PROJECT_SOURCE_DIR}/src/lcd/lcd.cpp  
+	${PROJECT_SOURCE_DIR}/src/human/human.cpp  
 	)
 
 add_executable(ctrl_server ${SRC_SERVER})
+target_link_libraries (ctrl_server pthread)
 
 set (EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 

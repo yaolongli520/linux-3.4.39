@@ -11,6 +11,8 @@
 #include "mytime.h"
 #include "disk.h"
 #include "ioctrl.h"
+#include "lcd.h"
+#include "human.h"
 
 using namespace std;
 
@@ -18,11 +20,26 @@ using namespace std;
 
 int main(int argc,char *argv[])
 {
-	int val;
+	int ret;
 	cout <<"I am main "<<endl;
-	param_init();
-	ioctrl_init();
+	ret = param_init();
+	if(ret) {
+		cout <<"param_init fail\n";
+	}
+	ret = ioctrl_init();
+	if(ret) {
+		cout <<"ioctrl_init fail\n";
+	}
 
+	ret = lcd_init();
+	if(ret) {
+		cout <<"lcd_init fail\n";
+	}
+
+	ret = human_init();
+	if(ret) {
+		cout <<"lcd_init fail\n";
+	}
 
 	
 	return 0;

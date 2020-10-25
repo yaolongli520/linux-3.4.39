@@ -145,7 +145,7 @@ int ioctrl_init(void)
 			write(cur_io[i].fd,&off,sizeof(off));
 	}
 	
-	return ret;
+	return 0;
 }
 
 
