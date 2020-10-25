@@ -10,6 +10,7 @@
 
 #include "mytime.h"
 #include "disk.h"
+#include "ioctrl.h"
 
 using namespace std;
 
@@ -17,10 +18,10 @@ using namespace std;
 
 int main(int argc,char *argv[])
 {
-
+	int val;
 	cout <<"I am main "<<endl;
 	param_init();
-
+	ioctrl_init();
 
 
 	

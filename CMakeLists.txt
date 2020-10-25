@@ -8,6 +8,7 @@ set (SRC_SERVER
 	${PROJECT_SOURCE_DIR}/src/core/main.cpp
 	${PROJECT_SOURCE_DIR}/src/time/mytime.cpp
 	${PROJECT_SOURCE_DIR}/src/disk/disk.cpp  
+	${PROJECT_SOURCE_DIR}/src/io_ctrl/ioctrl.cpp  
 	)
 
 add_executable(ctrl_server ${SRC_SERVER})
