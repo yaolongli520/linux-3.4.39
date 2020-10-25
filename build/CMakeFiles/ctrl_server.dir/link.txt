@@ -1,0 +1,1 @@
+/opt/FriendlyARM/toolchain/4.9.3/bin/arm-linux-g++      CMakeFiles/ctrl_server.dir/src/core/main.cpp.o CMakeFiles/ctrl_server.dir/src/time/mytime.cpp.o CMakeFiles/ctrl_server.dir/src/disk/disk.cpp.o  -o ../bin/ctrl_server 
