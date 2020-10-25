@@ -3,9 +3,19 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <string.h>
 
+#include <iostream>
 #include "disk.h"
+using namespace std;
 
+struct parm {
+	 uint8_t *par;
+	 uint32_t par_size;
+};
+
+
+static struct parm cur_parm;
 
 /**
  * get_file_size  获取文件的大小
@@ -198,3 +208,196 @@ void file_fseek(struct disk_crtl_date *date,long int off,enum f_start s)
 	else
 		fseek(date->fd,off,SEEK_END);	
 }
+
+
+/**
+ * find_par_addr  从cur_parm文件缓存中查到参数的地址
+ * @par_name: 要查找的参数名
+ * @addr: 参数的地址
+
+ * Return:	0 表示成功      ERR_FILE_OPS_INVALID 操作无效
+ */
+int find_par_addr(const char *par_name,char **addr)
+{
+	char *p;
+	int par_len;
+	if(par_name == NULL) {
+		printf("par_name is null\n");
+		return -ERR_FILE_OPS_INVALID;
+	}
+	par_len = strlen(par_name);
+	if(par_len > PARM_LEN_MAX || par_len < 1){
+		printf("par_name is untrue\n");
+		return -ERR_FILE_OPS_INVALID;
+	}
+
+	p = strstr((char *)cur_parm.par,par_name);
+	if(!p) {
+		*addr = NULL;
+		return -ERR_FILE_OPS_INVALID;
+	} else 
+		*addr = p;	
+	
+	return 0;
+
+}
+
+
+/**
+ * get_par  从cur_parm文件缓存中获取参数
+ * @buf: 保存返回参数的缓存区
+ * @len: 拷贝的最大有效长度
+
+ * Return:	0 表示成功      ERR_FILE_OPS_INVALID 操作无效
+ */
+
+int get_par(const char *par_name,char *buf,int len)
+{
+	int ret;
+	int par_len,cpy_len;
+	char *par, *p1, *p2;
+	ret = find_par_addr(par_name,&par);
+	if(ret) {
+		return -ERR_FILE_OPS_INVALID;
+	}
+	p1 = strchr(par,'"');
+	if(p1 == NULL) {
+		printf("file p1 is INVALID\n");
+		return -ERR_FILE_OPS_INVALID;
+	}
+	
+	p2 = strchr(p1+1,'"');
+	if(p2 == NULL) {
+		printf("file p2 is INVALID\n");
+		return -ERR_FILE_OPS_INVALID;
+	}
+
+	if(!buf)
+		return -ERR_FILE_OPS_INVALID;
+	else 
+		memset(buf,0,len);
+	
+	par_len = p2 - p1 - 1;
+	cpy_len = len > par_len?par_len:len;
+	memcpy(buf,p1+1,cpy_len);	
+	return 0;
+}
+
+
+/**
+ * set_par 设置cur_parm缓存中的参数
+ * @buf: 修改的参数的缓存区
+ * @len: 拷贝的最大有效长度
+
+ * Return:	0 表示成功      ERR_FILE_OPS_INVALID 操作无效
+ */
+
+int set_par(const char *par_name,const char *buf,int len)
+{
+	int ret;
+	int par_len,cpy_len;
+	char *par, *p1, *p2;
+	ret = find_par_addr(par_name,&par);
+	if(ret) {
+		return -ERR_FILE_OPS_INVALID;
+	}
+	p1 = strchr(par,'"');
+	if(p1 == NULL) {
+		printf("file p1 is INVALID\n");
+		return -ERR_FILE_OPS_INVALID;
+	}
+	
+	p2 = strchr(p1+1,'"');
+	if(p2 == NULL) {
+		printf("file p2 is INVALID\n");
+		return -ERR_FILE_OPS_INVALID;
+	}
+
+	if(!buf)
+		return -ERR_FILE_OPS_INVALID;
+
+	par_len = p2 - p1 - 1;
+	cpy_len = len > par_len?par_len:len;
+	memcpy(p1+1, buf, cpy_len);	
+	return 0;
+}
+
+
+
+
+/**
+ * file_save_cfgparam  把cur_parm配置参数保存到文件中
+ *
+ * Return:	0 表示成功      ERR_FILE_NONE 打开失败
+ */
+int file_save_cfgparam(void)
+{
+	int ret;
+	FILE *fp;
+	int size = cur_parm.par_size;
+	const uint8_t *data = cur_parm.par; 
+			
+	fp = fopen(PARM_FILE,"w");
+	
+	if(fp == NULL) {
+		cout <<__func__<<" PARM_FILE not find!"<<endl;
+		return -ERR_FILE_NONE;
+	}
+	
+	fwrite(data, size, 1, fp);
+	fclose(fp);
+	return 0;
+}
+
+
+/**
+ * file_get_cfgparam  从文件中获取配置参数并初始化 cur_parm
+ *
+ * Return:	0 表示成功      ERR_FILE_NONE 打开失败
+ */
+int file_get_cfgparam(void)
+{
+	int size = get_file_size(PARM_FILE);
+	FILE *fp;
+	
+	if(size < 0) 
+		return -ERR_FILE_NONE;
+		
+	fp = fopen(PARM_FILE,"r");
+	
+	if(fp == NULL) {
+		cout <<__func__<<" PARM_FILE not find!"<<endl;
+		return -ERR_FILE_NONE;
+	}
+
+	cur_parm.par_size = size;
+	cur_parm.par = (uint8_t *)malloc(cur_parm.par_size);
+	if(!cur_parm.par) {
+		cout <<__func__<<" malloc fail!"<<endl;
+		return -1;
+	} else
+		printf("par base address =%p \n",cur_parm.par);
+	
+	memset(cur_parm.par,0,cur_parm.par_size);
+
+	fread(cur_parm.par, cur_parm.par_size, 1, fp);
+	
+	fclose(fp);
+	return 0;
+}
+
+
+
+/**
+ * param_init  初始化配置参数
+ *
+ * Return:	0 表示成功  ERR_FILE_OPS_INVALID 无参数    	     ERR_FILE_NONE 打开失败
+ */
+int param_init(void)
+{
+	int ret;
+	ret = file_get_cfgparam(); /*加载文件数据到缓存区*/
+	return ret;
+}
+
+

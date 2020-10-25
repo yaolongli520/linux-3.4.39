@@ -2,6 +2,14 @@
 #define __DISK_H
 
 #include <stdint.h>
+#include <stdlib.h>
+
+#define ERR_FILE_NONE			2  //文件不存在
+#define ERR_FILE_OPS_INVALID	3  //无效操作
+
+#define  PARM_FILE "/usr/config/param.txt"
+
+#define  PARM_LEN_MAX 	50  //参数名最大长度
 
 //写的方式都会删除内容从新写入
 enum disk_dir{
@@ -37,6 +45,13 @@ int disk_get_data(struct disk_crtl_date *date);
 void file_set_head(struct disk_crtl_date *date);
 void file_fseek(struct disk_crtl_date *date,long int off,enum f_start s);
 unsigned long get_file_size(const char *pfile_path);
+int param_init(void);
+int file_save_cfgparam(void);
+int set_par(const char *par_name,const char *buf,int len);
+int get_par(const char *par_name,char *buf,int len);
+
+
+
 #endif
 
 
