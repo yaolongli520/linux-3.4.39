@@ -3,11 +3,31 @@
 
 CMakeFiles/ctrl_server.dir/src/core/main.cpp.o
  ../include/disk.h
+ ../include/human.h
+ ../include/humiture.h
+ ../include/ioctrl.h
+ ../include/lcd.h
  ../include/mytime.h
  /mnt/hgfs/ubuntushare/ctrl_board/src/core/main.cpp
 CMakeFiles/ctrl_server.dir/src/disk/disk.cpp.o
  ../include/disk.h
  /mnt/hgfs/ubuntushare/ctrl_board/src/disk/disk.cpp
+CMakeFiles/ctrl_server.dir/src/human/human.cpp.o
+ ../include/disk.h
+ ../include/human.h
+ ../include/mytime.h
+ /mnt/hgfs/ubuntushare/ctrl_board/src/human/human.cpp
+CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o
+ ../include/disk.h
+ ../include/humiture.h
+ /mnt/hgfs/ubuntushare/ctrl_board/src/humiture/humiture.cpp
+CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o
+ ../include/ioctrl.h
+ /mnt/hgfs/ubuntushare/ctrl_board/src/io_ctrl/ioctrl.cpp
+CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o
+ ../include/disk.h
+ ../include/lcd.h
+ /mnt/hgfs/ubuntushare/ctrl_board/src/lcd/lcd.cpp
 CMakeFiles/ctrl_server.dir/src/time/mytime.cpp.o
  ../include/mytime.h
  /mnt/hgfs/ubuntushare/ctrl_board/src/time/mytime.cpp

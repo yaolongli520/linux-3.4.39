@@ -177,6 +177,114 @@ src/disk/disk.cpp.s:
 	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/disk/disk.cpp.s
 .PHONY : src/disk/disk.cpp.s
 
+src/human/human.o: src/human/human.cpp.o
+
+.PHONY : src/human/human.o
+
+# target to build an object file
+src/human/human.cpp.o:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/human/human.cpp.o
+.PHONY : src/human/human.cpp.o
+
+src/human/human.i: src/human/human.cpp.i
+
+.PHONY : src/human/human.i
+
+# target to preprocess a source file
+src/human/human.cpp.i:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/human/human.cpp.i
+.PHONY : src/human/human.cpp.i
+
+src/human/human.s: src/human/human.cpp.s
+
+.PHONY : src/human/human.s
+
+# target to generate assembly for a file
+src/human/human.cpp.s:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/human/human.cpp.s
+.PHONY : src/human/human.cpp.s
+
+src/humiture/humiture.o: src/humiture/humiture.cpp.o
+
+.PHONY : src/humiture/humiture.o
+
+# target to build an object file
+src/humiture/humiture.cpp.o:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o
+.PHONY : src/humiture/humiture.cpp.o
+
+src/humiture/humiture.i: src/humiture/humiture.cpp.i
+
+.PHONY : src/humiture/humiture.i
+
+# target to preprocess a source file
+src/humiture/humiture.cpp.i:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.i
+.PHONY : src/humiture/humiture.cpp.i
+
+src/humiture/humiture.s: src/humiture/humiture.cpp.s
+
+.PHONY : src/humiture/humiture.s
+
+# target to generate assembly for a file
+src/humiture/humiture.cpp.s:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.s
+.PHONY : src/humiture/humiture.cpp.s
+
+src/io_ctrl/ioctrl.o: src/io_ctrl/ioctrl.cpp.o
+
+.PHONY : src/io_ctrl/ioctrl.o
+
+# target to build an object file
+src/io_ctrl/ioctrl.cpp.o:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o
+.PHONY : src/io_ctrl/ioctrl.cpp.o
+
+src/io_ctrl/ioctrl.i: src/io_ctrl/ioctrl.cpp.i
+
+.PHONY : src/io_ctrl/ioctrl.i
+
+# target to preprocess a source file
+src/io_ctrl/ioctrl.cpp.i:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.i
+.PHONY : src/io_ctrl/ioctrl.cpp.i
+
+src/io_ctrl/ioctrl.s: src/io_ctrl/ioctrl.cpp.s
+
+.PHONY : src/io_ctrl/ioctrl.s
+
+# target to generate assembly for a file
+src/io_ctrl/ioctrl.cpp.s:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.s
+.PHONY : src/io_ctrl/ioctrl.cpp.s
+
+src/lcd/lcd.o: src/lcd/lcd.cpp.o
+
+.PHONY : src/lcd/lcd.o
+
+# target to build an object file
+src/lcd/lcd.cpp.o:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o
+.PHONY : src/lcd/lcd.cpp.o
+
+src/lcd/lcd.i: src/lcd/lcd.cpp.i
+
+.PHONY : src/lcd/lcd.i
+
+# target to preprocess a source file
+src/lcd/lcd.cpp.i:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.i
+.PHONY : src/lcd/lcd.cpp.i
+
+src/lcd/lcd.s: src/lcd/lcd.cpp.s
+
+.PHONY : src/lcd/lcd.s
+
+# target to generate assembly for a file
+src/lcd/lcd.cpp.s:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.s
+.PHONY : src/lcd/lcd.cpp.s
+
 src/time/mytime.o: src/time/mytime.cpp.o
 
 .PHONY : src/time/mytime.o
@@ -219,6 +327,18 @@ help:
 	@echo "... src/disk/disk.o"
 	@echo "... src/disk/disk.i"
 	@echo "... src/disk/disk.s"
+	@echo "... src/human/human.o"
+	@echo "... src/human/human.i"
+	@echo "... src/human/human.s"
+	@echo "... src/humiture/humiture.o"
+	@echo "... src/humiture/humiture.i"
+	@echo "... src/humiture/humiture.s"
+	@echo "... src/io_ctrl/ioctrl.o"
+	@echo "... src/io_ctrl/ioctrl.i"
+	@echo "... src/io_ctrl/ioctrl.s"
+	@echo "... src/lcd/lcd.o"
+	@echo "... src/lcd/lcd.i"
+	@echo "... src/lcd/lcd.s"
 	@echo "... src/time/mytime.o"
 	@echo "... src/time/mytime.i"
 	@echo "... src/time/mytime.s"

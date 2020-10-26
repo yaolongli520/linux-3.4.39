@@ -11,6 +11,7 @@ set (SRC_SERVER
 	${PROJECT_SOURCE_DIR}/src/io_ctrl/ioctrl.cpp  
 	${PROJECT_SOURCE_DIR}/src/lcd/lcd.cpp  
 	${PROJECT_SOURCE_DIR}/src/human/human.cpp  
+	${PROJECT_SOURCE_DIR}/src/humiture/humiture.cpp  
 	)
 
 add_executable(ctrl_server ${SRC_SERVER})

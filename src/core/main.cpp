@@ -13,6 +13,8 @@
 #include "ioctrl.h"
 #include "lcd.h"
 #include "human.h"
+#include "humiture.h"
+
 
 using namespace std;
 
@@ -21,6 +23,8 @@ using namespace std;
 int main(int argc,char *argv[])
 {
 	int ret;
+	int hum;
+	
 	cout <<"I am main "<<endl;
 	ret = param_init();
 	if(ret) {
@@ -38,9 +42,25 @@ int main(int argc,char *argv[])
 
 	ret = human_init();
 	if(ret) {
-		cout <<"lcd_init fail\n";
+		cout <<"human_init fail\n";
 	}
 
+	ret = humiture_init();
+	if(ret) {
+		cout <<"humiture_init fail\n";
+	}
+
+	printf("......\n");
+	while(1){
+		hum = hunman_get_satus();
+		if(hum == 1) printf("has human \n");
+		else printf("none human \n");
+
+		printf("cur temp =%f \n",humiture_get_temp());
+		printf("cur hudiy =%f \n",humiture_get_hudiy());
+		
+		sleep(1);
+	}
 	
 	return 0;
 }

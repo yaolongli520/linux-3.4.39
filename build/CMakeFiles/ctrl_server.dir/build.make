@@ -129,11 +129,111 @@ CMakeFiles/ctrl_server.dir/src/disk/disk.cpp.o.provides: CMakeFiles/ctrl_server.
 CMakeFiles/ctrl_server.dir/src/disk/disk.cpp.o.provides.build: CMakeFiles/ctrl_server.dir/src/disk/disk.cpp.o
 
 
+CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o: CMakeFiles/ctrl_server.dir/flags.make
+CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o: ../src/io_ctrl/ioctrl.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hgfs/ubuntushare/ctrl_board/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o"
+	/opt/FriendlyARM/toolchain/4.9.3/bin/arm-linux-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o -c /mnt/hgfs/ubuntushare/ctrl_board/src/io_ctrl/ioctrl.cpp
+
+CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.i"
+	/opt/FriendlyARM/toolchain/4.9.3/bin/arm-linux-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/hgfs/ubuntushare/ctrl_board/src/io_ctrl/ioctrl.cpp > CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.i
+
+CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.s"
+	/opt/FriendlyARM/toolchain/4.9.3/bin/arm-linux-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/hgfs/ubuntushare/ctrl_board/src/io_ctrl/ioctrl.cpp -o CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.s
+
+CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o.requires:
+
+.PHONY : CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o.requires
+
+CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o.provides: CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o.requires
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o.provides.build
+.PHONY : CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o.provides
+
+CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o.provides.build: CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o
+
+
+CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o: CMakeFiles/ctrl_server.dir/flags.make
+CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o: ../src/lcd/lcd.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hgfs/ubuntushare/ctrl_board/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o"
+	/opt/FriendlyARM/toolchain/4.9.3/bin/arm-linux-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o -c /mnt/hgfs/ubuntushare/ctrl_board/src/lcd/lcd.cpp
+
+CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.i"
+	/opt/FriendlyARM/toolchain/4.9.3/bin/arm-linux-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/hgfs/ubuntushare/ctrl_board/src/lcd/lcd.cpp > CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.i
+
+CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.s"
+	/opt/FriendlyARM/toolchain/4.9.3/bin/arm-linux-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/hgfs/ubuntushare/ctrl_board/src/lcd/lcd.cpp -o CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.s
+
+CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o.requires:
+
+.PHONY : CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o.requires
+
+CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o.provides: CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o.requires
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o.provides.build
+.PHONY : CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o.provides
+
+CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o.provides.build: CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o
+
+
+CMakeFiles/ctrl_server.dir/src/human/human.cpp.o: CMakeFiles/ctrl_server.dir/flags.make
+CMakeFiles/ctrl_server.dir/src/human/human.cpp.o: ../src/human/human.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hgfs/ubuntushare/ctrl_board/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/ctrl_server.dir/src/human/human.cpp.o"
+	/opt/FriendlyARM/toolchain/4.9.3/bin/arm-linux-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ctrl_server.dir/src/human/human.cpp.o -c /mnt/hgfs/ubuntushare/ctrl_board/src/human/human.cpp
+
+CMakeFiles/ctrl_server.dir/src/human/human.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ctrl_server.dir/src/human/human.cpp.i"
+	/opt/FriendlyARM/toolchain/4.9.3/bin/arm-linux-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/hgfs/ubuntushare/ctrl_board/src/human/human.cpp > CMakeFiles/ctrl_server.dir/src/human/human.cpp.i
+
+CMakeFiles/ctrl_server.dir/src/human/human.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ctrl_server.dir/src/human/human.cpp.s"
+	/opt/FriendlyARM/toolchain/4.9.3/bin/arm-linux-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/hgfs/ubuntushare/ctrl_board/src/human/human.cpp -o CMakeFiles/ctrl_server.dir/src/human/human.cpp.s
+
+CMakeFiles/ctrl_server.dir/src/human/human.cpp.o.requires:
+
+.PHONY : CMakeFiles/ctrl_server.dir/src/human/human.cpp.o.requires
+
+CMakeFiles/ctrl_server.dir/src/human/human.cpp.o.provides: CMakeFiles/ctrl_server.dir/src/human/human.cpp.o.requires
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/human/human.cpp.o.provides.build
+.PHONY : CMakeFiles/ctrl_server.dir/src/human/human.cpp.o.provides
+
+CMakeFiles/ctrl_server.dir/src/human/human.cpp.o.provides.build: CMakeFiles/ctrl_server.dir/src/human/human.cpp.o
+
+
+CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o: CMakeFiles/ctrl_server.dir/flags.make
+CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o: ../src/humiture/humiture.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hgfs/ubuntushare/ctrl_board/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o"
+	/opt/FriendlyARM/toolchain/4.9.3/bin/arm-linux-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o -c /mnt/hgfs/ubuntushare/ctrl_board/src/humiture/humiture.cpp
+
+CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.i"
+	/opt/FriendlyARM/toolchain/4.9.3/bin/arm-linux-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/hgfs/ubuntushare/ctrl_board/src/humiture/humiture.cpp > CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.i
+
+CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.s"
+	/opt/FriendlyARM/toolchain/4.9.3/bin/arm-linux-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/hgfs/ubuntushare/ctrl_board/src/humiture/humiture.cpp -o CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.s
+
+CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o.requires:
+
+.PHONY : CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o.requires
+
+CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o.provides: CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o.requires
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o.provides.build
+.PHONY : CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o.provides
+
+CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o.provides.build: CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o
+
+
 # Object files for target ctrl_server
 ctrl_server_OBJECTS = \
 "CMakeFiles/ctrl_server.dir/src/core/main.cpp.o" \
 "CMakeFiles/ctrl_server.dir/src/time/mytime.cpp.o" \
-"CMakeFiles/ctrl_server.dir/src/disk/disk.cpp.o"
+"CMakeFiles/ctrl_server.dir/src/disk/disk.cpp.o" \
+"CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o" \
+"CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o" \
+"CMakeFiles/ctrl_server.dir/src/human/human.cpp.o" \
+"CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o"
 
 # External object files for target ctrl_server
 ctrl_server_EXTERNAL_OBJECTS =
@@ -141,9 +241,13 @@ ctrl_server_EXTERNAL_OBJECTS =
 ../bin/ctrl_server: CMakeFiles/ctrl_server.dir/src/core/main.cpp.o
 ../bin/ctrl_server: CMakeFiles/ctrl_server.dir/src/time/mytime.cpp.o
 ../bin/ctrl_server: CMakeFiles/ctrl_server.dir/src/disk/disk.cpp.o
+../bin/ctrl_server: CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o
+../bin/ctrl_server: CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o
+../bin/ctrl_server: CMakeFiles/ctrl_server.dir/src/human/human.cpp.o
+../bin/ctrl_server: CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o
 ../bin/ctrl_server: CMakeFiles/ctrl_server.dir/build.make
 ../bin/ctrl_server: CMakeFiles/ctrl_server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/hgfs/ubuntushare/ctrl_board/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable ../bin/ctrl_server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/hgfs/ubuntushare/ctrl_board/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable ../bin/ctrl_server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ctrl_server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -154,6 +258,10 @@ CMakeFiles/ctrl_server.dir/build: ../bin/ctrl_server
 CMakeFiles/ctrl_server.dir/requires: CMakeFiles/ctrl_server.dir/src/core/main.cpp.o.requires
 CMakeFiles/ctrl_server.dir/requires: CMakeFiles/ctrl_server.dir/src/time/mytime.cpp.o.requires
 CMakeFiles/ctrl_server.dir/requires: CMakeFiles/ctrl_server.dir/src/disk/disk.cpp.o.requires
+CMakeFiles/ctrl_server.dir/requires: CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o.requires
+CMakeFiles/ctrl_server.dir/requires: CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o.requires
+CMakeFiles/ctrl_server.dir/requires: CMakeFiles/ctrl_server.dir/src/human/human.cpp.o.requires
+CMakeFiles/ctrl_server.dir/requires: CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o.requires
 
 .PHONY : CMakeFiles/ctrl_server.dir/requires
 

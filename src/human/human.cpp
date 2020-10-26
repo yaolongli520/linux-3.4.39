@@ -36,7 +36,28 @@ enum mod_status{
 	TARGET_EXIST,
 	MACH_SUSPEND,
 };
+	
 
+/**
+ * hunman_get_satus  获取人体状态
+ *
+ * Return:	0 表示成功
+ */
+
+int hunman_get_satus(void)
+{
+	if(!cur_hunman.is_init) 
+		return HUM_FAIL;
+	else
+		return cur_hunman.has_hunman;
+}
+
+
+/**
+ * hunman_scanf  人体传感器扫描
+ *
+ * Return:	0 表示成功
+ */
 
 void *hunman_scanf(void *data)
 {
@@ -52,7 +73,7 @@ void *hunman_scanf(void *data)
 		printf("%s is exit, hunman is not init\n");
 		return NULL;
 	}
-	#if 0
+	
 	while(1) {
 		if( read(fd, &vEvent, sizeof(vEvent)) > 0)
 		{
@@ -68,7 +89,7 @@ void *hunman_scanf(void *data)
 			}
 			else {   		//下降
 				if(status == TARGET_NONE) 
-					printf("this is warning \n");
+					printf("this is warning \n"); //下降前是没有??
 				if(status == TARGET_EXIST)
 					clock_gettime(CLOCK_REALTIME, &fall_t);	//记下下降时间		
 			//	printf(" fall_t.tv_sec =%u \n",fall_t.tv_sec);
@@ -87,11 +108,14 @@ void *hunman_scanf(void *data)
 				status = TARGET_NONE;
 			}
 		}
-			
+
+		if(status == TARGET_EXIST)
+			cur_data->has_hunman = 1; //有人
+		else if(status == TARGET_NONE)
+			cur_data->has_hunman = 0; //没人	
+		
 	}
-	#endif
-	printf("%s %d\n",__func__,__LINE__);
-	
+
 	close(fd);	
 	cur_data->is_init = false;
 }
@@ -131,8 +155,10 @@ int human_init(void)
 
 	ret = pthread_create(&id, NULL,
 					   hunman_scanf,&cur_hunman);
+	if(ret)
+		printf("%s pthread_create fail \n",__func__);
 
-	return 0;
+	return ret;
 
 }
 
