@@ -7,6 +7,7 @@ CMakeFiles/ctrl_server.dir/src/core/main.cpp.o: ../include/humiture.h
 CMakeFiles/ctrl_server.dir/src/core/main.cpp.o: ../include/ioctrl.h
 CMakeFiles/ctrl_server.dir/src/core/main.cpp.o: ../include/lcd.h
 CMakeFiles/ctrl_server.dir/src/core/main.cpp.o: ../include/mytime.h
+CMakeFiles/ctrl_server.dir/src/core/main.cpp.o: ../include/nrf24l01.h
 CMakeFiles/ctrl_server.dir/src/core/main.cpp.o: ../src/core/main.cpp
 
 CMakeFiles/ctrl_server.dir/src/disk/disk.cpp.o: ../include/disk.h
@@ -27,6 +28,9 @@ CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o: ../src/io_ctrl/ioctrl.cpp
 CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o: ../include/disk.h
 CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o: ../include/lcd.h
 CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o: ../src/lcd/lcd.cpp
+
+CMakeFiles/ctrl_server.dir/src/nrf24l01/nrf24l01.cpp.o: ../include/nrf24l01.h
+CMakeFiles/ctrl_server.dir/src/nrf24l01/nrf24l01.cpp.o: ../src/nrf24l01/nrf24l01.cpp
 
 CMakeFiles/ctrl_server.dir/src/time/mytime.cpp.o: ../include/mytime.h
 CMakeFiles/ctrl_server.dir/src/time/mytime.cpp.o: ../src/time/mytime.cpp

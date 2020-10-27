@@ -12,6 +12,7 @@ set (SRC_SERVER
 	${PROJECT_SOURCE_DIR}/src/lcd/lcd.cpp  
 	${PROJECT_SOURCE_DIR}/src/human/human.cpp  
 	${PROJECT_SOURCE_DIR}/src/humiture/humiture.cpp  
+	${PROJECT_SOURCE_DIR}/src/nrf24l01/nrf24l01.cpp  
 	)
 
 add_executable(ctrl_server ${SRC_SERVER})

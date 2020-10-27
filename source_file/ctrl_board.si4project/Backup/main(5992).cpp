@@ -14,7 +14,7 @@
 #include "lcd.h"
 #include "human.h"
 #include "humiture.h"
-#include "nrf24l01.h"
+
 
 using namespace std;
 
@@ -24,7 +24,6 @@ int main(int argc,char *argv[])
 {
 	int ret;
 	int hum;
-	int val = 0;
 	
 	cout <<"I am main "<<endl;
 	ret = param_init();
@@ -51,11 +50,7 @@ int main(int argc,char *argv[])
 		cout <<"humiture_init fail\n";
 	}
 
-	ret = nrf24l01_init();
-	if(ret) {
-			cout <<"humiture_init fail\n";
-	}
-
+	printf("......\n");
 	while(1){
 		hum = hunman_get_satus();
 		if(hum == 1) printf("has human \n");
@@ -63,10 +58,8 @@ int main(int argc,char *argv[])
 
 		printf("cur temp =%f \n",humiture_get_temp());
 		printf("cur hudiy =%f \n",humiture_get_hudiy());
-		set_io_val("IO_BUZZER",val);
-		val = !val;
+		
 		sleep(1);
-
 	}
 	
 	return 0;

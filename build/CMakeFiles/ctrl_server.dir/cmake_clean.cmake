@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o"
   "CMakeFiles/ctrl_server.dir/src/human/human.cpp.o"
   "CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o"
+  "CMakeFiles/ctrl_server.dir/src/nrf24l01/nrf24l01.cpp.o"
   "../bin/ctrl_server.pdb"
   "../bin/ctrl_server"
 )

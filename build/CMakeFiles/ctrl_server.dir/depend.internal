@@ -8,6 +8,7 @@ CMakeFiles/ctrl_server.dir/src/core/main.cpp.o
  ../include/ioctrl.h
  ../include/lcd.h
  ../include/mytime.h
+ ../include/nrf24l01.h
  /mnt/hgfs/ubuntushare/ctrl_board/src/core/main.cpp
 CMakeFiles/ctrl_server.dir/src/disk/disk.cpp.o
  ../include/disk.h
@@ -28,6 +29,9 @@ CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o
  ../include/disk.h
  ../include/lcd.h
  /mnt/hgfs/ubuntushare/ctrl_board/src/lcd/lcd.cpp
+CMakeFiles/ctrl_server.dir/src/nrf24l01/nrf24l01.cpp.o
+ ../include/nrf24l01.h
+ /mnt/hgfs/ubuntushare/ctrl_board/src/nrf24l01/nrf24l01.cpp
 CMakeFiles/ctrl_server.dir/src/time/mytime.cpp.o
  ../include/mytime.h
  /mnt/hgfs/ubuntushare/ctrl_board/src/time/mytime.cpp

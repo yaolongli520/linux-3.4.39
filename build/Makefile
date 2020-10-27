@@ -285,6 +285,33 @@ src/lcd/lcd.cpp.s:
 	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.s
 .PHONY : src/lcd/lcd.cpp.s
 
+src/nrf24l01/nrf24l01.o: src/nrf24l01/nrf24l01.cpp.o
+
+.PHONY : src/nrf24l01/nrf24l01.o
+
+# target to build an object file
+src/nrf24l01/nrf24l01.cpp.o:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/nrf24l01/nrf24l01.cpp.o
+.PHONY : src/nrf24l01/nrf24l01.cpp.o
+
+src/nrf24l01/nrf24l01.i: src/nrf24l01/nrf24l01.cpp.i
+
+.PHONY : src/nrf24l01/nrf24l01.i
+
+# target to preprocess a source file
+src/nrf24l01/nrf24l01.cpp.i:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/nrf24l01/nrf24l01.cpp.i
+.PHONY : src/nrf24l01/nrf24l01.cpp.i
+
+src/nrf24l01/nrf24l01.s: src/nrf24l01/nrf24l01.cpp.s
+
+.PHONY : src/nrf24l01/nrf24l01.s
+
+# target to generate assembly for a file
+src/nrf24l01/nrf24l01.cpp.s:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/nrf24l01/nrf24l01.cpp.s
+.PHONY : src/nrf24l01/nrf24l01.cpp.s
+
 src/time/mytime.o: src/time/mytime.cpp.o
 
 .PHONY : src/time/mytime.o
@@ -339,6 +366,9 @@ help:
 	@echo "... src/lcd/lcd.o"
 	@echo "... src/lcd/lcd.i"
 	@echo "... src/lcd/lcd.s"
+	@echo "... src/nrf24l01/nrf24l01.o"
+	@echo "... src/nrf24l01/nrf24l01.i"
+	@echo "... src/nrf24l01/nrf24l01.s"
 	@echo "... src/time/mytime.o"
 	@echo "... src/time/mytime.i"
 	@echo "... src/time/mytime.s"
