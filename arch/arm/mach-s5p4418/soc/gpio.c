@@ -977,6 +977,10 @@ static int __init nxp_soc_gpio_device_init(void)
 	for (; n > i; i++)
 		IO_LOCK_INIT(i);
 
+	nxp_soc_gpio_set_io_func(PAD_GPIO_C +14,1); //gpio func
+        nxp_soc_gpio_set_io_dir((PAD_GPIO_C +14), 1); //out mode
+        nxp_soc_gpio_set_out_value((PAD_GPIO_C +14),0); //GPIOC14 LOW
+
 	return 0;
 }
 core_initcall(nxp_soc_gpio_device_init);
