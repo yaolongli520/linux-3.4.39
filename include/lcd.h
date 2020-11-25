@@ -23,7 +23,13 @@ enum {
 };
 
 
+const struct  fb_var_screeninfo *get_lcd_info(void);
+int lcd_backdrop_write(uint8_t *src);
+int lcd_topview_write(uint8_t *src);
+int backdrop_show_bmp(void);
+int lcd_combine_write(void); //合并显示
 
+void  raw_lcd_write(uint8_t *buf); //测试用
 
 
 

@@ -25,13 +25,14 @@ int main(int argc,char *argv[])
 	int ret;
 	int hum;
 	int val = 0;
+	uint8_t usr_buf[200] = { 0 };
 	
 	cout <<"I am main "<<endl;
 	ret = param_init();
 	if(ret) {
 		cout <<"param_init fail\n";
 	}
-	ret = ioctrl_init();
+	ret = ioctrl_init(); /*IO控制*/
 	if(ret) {
 		cout <<"ioctrl_init fail\n";
 	}
@@ -56,6 +57,9 @@ int main(int argc,char *argv[])
 			cout <<"humiture_init fail\n";
 	}
 
+	backdrop_show_bmp(); //背景显示
+	lcd_combine_write(); //合并显示
+
 	while(1){
 		hum = hunman_get_satus();
 		if(hum == 1) printf("has human \n");
@@ -63,7 +67,7 @@ int main(int argc,char *argv[])
 
 		printf("cur temp =%f \n",humiture_get_temp());
 		printf("cur hudiy =%f \n",humiture_get_hudiy());
-		set_io_val("IO_BUZZER",val);
+	//	set_io_val("IO_BUZZER",val);
 		val = !val;
 		sleep(1);
 

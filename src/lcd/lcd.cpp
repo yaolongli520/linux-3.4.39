@@ -26,21 +26,84 @@ struct lcd_data{
 static struct lcd_data cur_lcd;
 
 
+
+/**
+ * get_lcd_info  获取LCD参数
+ *  return 0
+ */
+const struct  fb_var_screeninfo *get_lcd_info(void)
+{
+	return &cur_lcd.fbinfo;
+
+}
+
+
+
+
+/**
+ * lcd_layer_write  写入图案
+ *  return 0
+ */
+static void lcd_layer_write(uint8_t *dts, uint8_t *src)
+{
+	int bpp = cur_lcd.fbinfo.bits_per_pixel/8;
+	uint32_t 	 size = cur_lcd.fbinfo.xres * cur_lcd.fbinfo.yres;
+	memcpy(dts, src, bpp * size);
+}
+
+
+/**
+ * lcd_topview_write  写入顶层图案
+ *  return 0
+ */
+int lcd_topview_write(uint8_t *src)
+{
+	uint8_t *dts = cur_lcd.topview;
+	
+	if(cur_lcd.is_init == false) {
+		printf("%s %d fail\n",__func__,__LINE__);
+		return -ERR_FILE_NONE;
+	}
+
+	lcd_layer_write(dts,src);
+	return 0;
+}
+
+
+/**
+ * lcd_backdrop_write  写入背景图案
+ *  return 0
+ */
+int lcd_backdrop_write(uint8_t *src)
+{
+	uint8_t *dts = cur_lcd.backdrop;
+	
+	if(cur_lcd.is_init == false) {
+		printf("%s %d fail\n",__func__,__LINE__);
+		return -ERR_FILE_NONE;
+	}
+	
+	lcd_layer_write(dts,src);
+	return 0;
+}
+
+
 /**
  * lcd_combine_write  合并两层显示内容
  *  return 0
  */
 int lcd_combine_write(void)
 {
-	int bpp = cur_lcd.fbinfo.bits_per_pixel/8;
 	uint16_t	*p16b, *p16t;
 	uint32_t 	*p32b, *p32t;
-	uint32_t 	 size = cur_lcd.fbinfo.xres * cur_lcd.fbinfo.yres; 
+	int bpp = cur_lcd.fbinfo.bits_per_pixel/8;
+	uint32_t  size = cur_lcd.fbinfo.xres * cur_lcd.fbinfo.yres; 
 	
 	
-	if(cur_lcd.is_init == false)
+	if(cur_lcd.is_init == false) {
+		printf("%s %d fail\n",__func__,__LINE__);
 		return -ERR_FILE_NONE;
-
+	}
 
 	if(bpp == 2) {
 		uint16_t buf[size];
@@ -60,12 +123,23 @@ int lcd_combine_write(void)
 			/*顶层不为0 设置为顶层*/
 			buf[i] = (p32t[i])?(p32t[i]):(p32b[i]);
 		}
-		lseek(cur_lcd.fd , 0 , SEEK_SET); //文件头
-		write(cur_lcd.fd,buf,sizeof(buf));
+		lseek(cur_lcd.fd , 0 , SEEK_SET); //定位文件头
+		write(cur_lcd.fd,buf,sizeof(buf));//写入
 	}else {
 		cout <<"fail bpp "<<endl;
 	}
 
+}
+
+
+//调试用
+void  raw_lcd_write(uint8_t *buf)
+{
+	int bpp = cur_lcd.fbinfo.bits_per_pixel/8;
+	uint32_t size = cur_lcd.fbinfo.xres * cur_lcd.fbinfo.yres;
+
+	lseek(cur_lcd.fd , 0 , SEEK_SET); //文件头
+	write(cur_lcd.fd, buf, bpp * size);
 }
 
 
@@ -78,8 +152,11 @@ int get_lcd_rotate(void)
 {
 	int rotate = cur_lcd.fbinfo.rotate;
 
-	if(cur_lcd.is_init == false)
+	if(cur_lcd.is_init == false) {
+		printf("%s %d fail\n",__func__,__LINE__);
 		return -ERR_FILE_NONE;
+	}
+
 
 	if(rotate == 0) 
 		return ROTA_0;
@@ -106,8 +183,11 @@ int set_lcd_rotate(int rotate)
 	int pixel_max, pixel_min;
 	int rotate_raw = cur_lcd.fbinfo.rotate;
 
-	if(cur_lcd.is_init == false)
+	if(cur_lcd.is_init == false) {
+		printf("%s %d fail\n",__func__,__LINE__);
 		return -ERR_FILE_NONE;
+	}
+
 
 	if(rotate_raw == rotate) 
 		return ret;
@@ -175,6 +255,8 @@ int lcd_init(void)
 		
 		cur_lcd.backdrop = (uint8_t *)malloc(size);
 		cur_lcd.topview = (uint8_t *)malloc(size);
+		memset(cur_lcd.backdrop, 0, size);
+		memset(cur_lcd.topview, 0, size);
 		/*分配空间*/
 		if((cur_lcd.backdrop==NULL) || (cur_lcd.topview == NULL)){
 			cout <<"malloc is fail "<<endl;
