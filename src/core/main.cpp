@@ -57,16 +57,17 @@ int main(int argc,char *argv[])
 			cout <<"humiture_init fail\n";
 	}
 
-	backdrop_show_bmp(); //背景显示
+//	backdrop_show_bmp(); //背景bmp显示
+	backdrop_show_jpg(); //背景jpg显示
 	lcd_combine_write(); //合并显示
 
 	while(1){
 		hum = hunman_get_satus();
-		if(hum == 1) printf("has human \n");
-		else printf("none human \n");
+	//	if(hum == 1) printf("has human \n");
+	//	else printf("none human \n");
 
-		printf("cur temp =%f \n",humiture_get_temp());
-		printf("cur hudiy =%f \n",humiture_get_hudiy());
+	//	printf("cur temp =%f \n",humiture_get_temp());
+	//	printf("cur hudiy =%f \n",humiture_get_hudiy());
 	//	set_io_val("IO_BUZZER",val);
 		val = !val;
 		sleep(1);

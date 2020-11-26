@@ -6,6 +6,10 @@
 
 #define ERR_FILE_NONE			2  //文件不存在
 #define ERR_FILE_OPS_INVALID	3  //无效操作
+#define ERR_PARM_NOT_SET 		4  //配置参数未设置
+#define ERR_FILE_NOT_SIZE		5  //文件大小为0
+#define ERR_MALLOC			  	6  //分配空间不足
+
 
 #define  PARM_FILE "/usr/config/param.txt"
 
