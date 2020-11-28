@@ -57,8 +57,13 @@ int main(int argc,char *argv[])
 			cout <<"humiture_init fail\n";
 	}
 
-//	backdrop_show_bmp(); //背景bmp显示
-	backdrop_show_jpg(); //背景jpg显示
+	wchar_t w2_text[] = L"时间 :19:30:25";
+	wchar_t w3_text[] = L"晚上 :18:40:38";
+	backdrop_show_bmp(); //背景bmp显示
+//	backdrop_show_jpg(); //背景jpg显示
+	show_free_type(w2_text, 32, 0xffff, 0, 20);
+//	show_free_type(w3_text, 32, 0xffff, 0, 20);
+
 	lcd_combine_write(); //合并显示
 
 	while(1){
