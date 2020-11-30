@@ -25,6 +25,36 @@ using namespace std;
 
 
 /**
+ * rotation_by_90  旋转90度进行显示
+ * @pdata 图片数据
+ * @pw 宽
+ * @ph 高
+ *
+ * 成功 return 0
+ */
+void rotation_by_90(uint8_t *pdata, int pw,int ph)
+{
+	int i, j;
+	uint8_t buf[pw * ph * 3];
+	uint8_t *ps , *pd;
+
+	ps = pdata;
+	pd = buf;
+	
+	memset(buf, 0, sizeof(buf));
+	for(i = 0; i < pw; i++) {
+		for(j = 0; j < ph; j++) {
+			memcpy(&pd[ph*3*i + 3*j],&ps[pw*3*j + 3*i],3);
+		}
+	}
+	
+	memcpy(pdata,buf,sizeof(buf));
+
+}
+
+
+
+/**
  * show_bmp  背景写入BMP 并不会立刻起作用!!!
  *
  * 成功 return 0
@@ -60,6 +90,11 @@ int show_bmp(uint8_t	*data)
 		cout <<"pw:"<<pw<<" ph"<<ph<<" pbpp"<<pbpp<<endl;
 	}
 
+	//可以旋转90度显示
+	if(bw == ph && bh == pw) {
+		cout << "Rotation by 90 degrees show"<<endl;
+		rotation_by_90(p , bw, bh); //旋转
+	}
 	
 	if((pbpp * 8) == 32) {	
 		for(i=0; i < pw * ph; i++)
@@ -152,6 +187,10 @@ int show_jpg(uint8_t	*data, unsigned int size)
 		cout <<"pw:"<<pw<<" ph"<<ph<<" pbpp"<<pbpp<<endl;
 	}	
 
+	if(pw == jh && ph == jw) {
+		cout << "Rotation by 90 degrees show jpg"<<endl;
+	}
+
 	/*读解码数据*/
 	while(cinfo.output_scanline < cinfo.output_height ) //循环次数是高度
 	{		
@@ -162,14 +201,25 @@ int show_jpg(uint8_t	*data, unsigned int size)
 		
 		for(i=0; i<cinfo.output_width; i++) //处理这一行
 		{
+			//旋转90度调整
+			if(pw == jh && ph == jw) {
+				if((pbpp * 8) == 32) {	
+					uint32_t *p32 = (uint32_t *)show_buf;
+					p32[j + i * pw] = (*(pcolor_buf+2))| ((*(pcolor_buf+1))<<8)|((*(pcolor_buf))<<16);
+				}else if((pbpp * 8) == 16) {
+					uint16_t *p16 = (uint16_t *)show_buf;
+					p16[j + i * pw] = (((*(pcolor_buf+2)) >> 3)& 0x1f) | ((((*(pcolor_buf+1))>>2)&0x3f) <<5) | ((((*(pcolor_buf))>>3)&0x1f) << 11);
+				}	
 
-			if((pbpp * 8) == 32) {	
-				uint32_t *p32 = (uint32_t *)show_buf;
-				p32[i + j * pw] = (*(pcolor_buf+2))| ((*(pcolor_buf+1))<<8)|((*(pcolor_buf))<<16);
-			}else if((pbpp * 8) == 16) {
-				uint16_t *p16 = (uint16_t *)show_buf;
-				p16[i + j * pw] = (((*(pcolor_buf+2)) >> 3)& 0x1f) | ((((*(pcolor_buf+1))>>2)&0x3f) <<5) | ((((*(pcolor_buf))>>3)&0x1f) << 11);
-			}		
+			}else {
+				if((pbpp * 8) == 32) {	
+					uint32_t *p32 = (uint32_t *)show_buf;
+					p32[i + j * pw] = (*(pcolor_buf+2))| ((*(pcolor_buf+1))<<8)|((*(pcolor_buf))<<16);
+				}else if((pbpp * 8) == 16) {
+					uint16_t *p16 = (uint16_t *)show_buf;
+					p16[i + j * pw] = (((*(pcolor_buf+2)) >> 3)& 0x1f) | ((((*(pcolor_buf+1))>>2)&0x3f) <<5) | ((((*(pcolor_buf))>>3)&0x1f) << 11);
+				}
+			}
 			/* 显示像素点 */			
 			pcolor_buf +=3; //下一个点
 		}
@@ -180,6 +230,14 @@ int show_jpg(uint8_t	*data, unsigned int size)
 	/*解码完成*/
 	jpeg_finish_decompress(&cinfo);
 	jpeg_destroy_decompress(&cinfo);	
+
+	#if 0
+	//可以旋转90度显示
+	if(jw == ph && jh == pw) {
+		cout << "Rotation by 90 degrees show"<<endl;
+		rotation_by_90(show_buf , pw, ph); //旋转
+	}
+	#endif
 
 	lcd_backdrop_write(show_buf);
 

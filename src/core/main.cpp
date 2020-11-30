@@ -25,7 +25,7 @@ int main(int argc,char *argv[])
 	int ret;
 	int hum;
 	int val = 0;
-	uint8_t usr_buf[200] = { 0 };
+	char usr_buf[200] = { 0 };
 	
 	cout <<"I am main "<<endl;
 	ret = param_init();
@@ -57,14 +57,22 @@ int main(int argc,char *argv[])
 			cout <<"humiture_init fail\n";
 	}
 
-	wchar_t w2_text[] = L"时间 :19:30:25";
-	wchar_t w3_text[] = L"晚上 :18:40:38";
-	backdrop_show_bmp(); //背景bmp显示
-//	backdrop_show_jpg(); //背景jpg显示
-	show_free_type(w2_text, 32, 0xffff, 0, 20);
-//	show_free_type(w3_text, 32, 0xffff, 0, 20);
 
+	wchar_t wb_text[] = L"时间:";
+	wchar_t wt_text[] = L"23:16:12";
+
+
+//	backdrop_show_bmp(); //背景bmp显示
+	backdrop_show_jpg(); //背景jpg显示
+	
+	show_free_type(wb_text, 32, 0xf800, 0, 32); //显示字符时间
 	lcd_combine_write(); //合并显示
+
+
+
+
+	
+	
 
 	while(1){
 		hum = hunman_get_satus();
@@ -75,10 +83,14 @@ int main(int argc,char *argv[])
 	//	printf("cur hudiy =%f \n",humiture_get_hudiy());
 	//	set_io_val("IO_BUZZER",val);
 		val = !val;
+		get_cur_time(TIME_GET_TIME,usr_buf); //获取时间
+		mbstowcs(wt_text, usr_buf, strlen(usr_buf));//转换成宽字符串
+		show_free_type(wt_text, 32, 0x1f, 80, 32);//写入顶层缓存
+		lcd_combine_write(); //合并显示
 		sleep(1);
 
 	}
-	
+
 	return 0;
 }
 

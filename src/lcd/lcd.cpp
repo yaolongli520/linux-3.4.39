@@ -25,6 +25,15 @@ struct lcd_data{
 
 static struct lcd_data cur_lcd;
 
+/**
+ * get_lcd_top_buffer  获取LCD顶层缓存区
+ *  return 0
+ */
+uint8_t * get_lcd_top_buffer(void)
+{
+	return cur_lcd.topview;
+
+}
 
 
 /**
@@ -157,15 +166,7 @@ int get_lcd_rotate(void)
 		return -ERR_FILE_NONE;
 	}
 
-
-	if(rotate == 0) 
-		return ROTA_0;
-	else if(rotate == 90) 
-		return ROTA_90;
-	else if(rotate == 180) 
-		return ROTA_180;
-	else if(rotate == 270) 
-		return ROTA_270;
+	return	rotate;
 
 	cout <<__func__<<" rotate is error"<<endl;
 	return -1;
@@ -196,14 +197,14 @@ int set_lcd_rotate(int rotate)
 	pixel_min = min(cur_lcd.fbinfo.xres, cur_lcd.fbinfo.yres);
 
 	/*横屏*/
-	if((rotate == ROTA_0) ||(rotate == ROTA_180)){
+	if((rotate == 0) ||(rotate == 180)){
 		cur_lcd.fbinfo.xres = pixel_max;
 		cur_lcd.fbinfo.yres = pixel_min;
 		cur_lcd.fbinfo.rotate = rotate;
 	}
 
 	/*竖屏*/
-	if((rotate == ROTA_90) ||(rotate == ROTA_270)){
+	if((rotate == 90) ||(rotate == 270)){
 		cur_lcd.fbinfo.xres = pixel_min;
 		cur_lcd.fbinfo.yres = pixel_max;
 		cur_lcd.fbinfo.rotate = rotate;
@@ -228,6 +229,9 @@ int lcd_init(void)
 	int fd;
 	int ret;
 	char file_name[30] = {0};
+	int rotate  = 0;
+	char rotate_buf[10];
+	
 	ret = get_par("fbdev",file_name,sizeof(file_name));
 	if(ret) {
 		printf("par fbdev is no find \n");
@@ -251,8 +255,8 @@ int lcd_init(void)
 		}
 
 		size = cur_lcd.fbinfo.xres * cur_lcd.fbinfo.yres *
-			cur_lcd.fbinfo.bits_per_pixel/8;
-		
+				cur_lcd.fbinfo.bits_per_pixel/8;
+			
 		cur_lcd.backdrop = (uint8_t *)malloc(size);
 		cur_lcd.topview = (uint8_t *)malloc(size);
 		memset(cur_lcd.backdrop, 0, size);
@@ -262,8 +266,24 @@ int lcd_init(void)
 			cout <<"malloc is fail "<<endl;
 			return -ERR_FILE_OPS_INVALID;
 		}
-
+		
 		cur_lcd.is_init = true;
+
+		//获取旋转角度
+		ret = get_par("rotate",rotate_buf,sizeof(rotate_buf)); 
+		if(ret < 0){
+			rotate = 0;//使用默认旋转 0
+			printf("par rotate  no set use default rotate:%d \n",rotate);
+		}else {
+			rotate = atoi(rotate_buf);
+			if(rotate!=0 && rotate!=90 && rotate!=180 && rotate!=270) {
+				printf("par rotate:%d is illegal use 0\n",rotate);
+				rotate = 0;
+			}
+		}
+
+		set_lcd_rotate(rotate); 
+		
 	}
 	
 	return 0;

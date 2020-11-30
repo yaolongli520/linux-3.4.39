@@ -34,11 +34,17 @@ public:
 	int  tx(uint8_t *buf,uint32_t count);
 	int  rx(uint8_t *buf,uint32_t count);
 	int  find_dev(void);
+	NRF_OPS(){ cout <<"make nrf24l01"<<endl; }
 	~NRF_OPS()
 	{
+		cout <<"close nrf24l01"<<endl;
 		close(fd);
-	}
+	} 
 };
+
+
+
+
 
 int NRF_OPS::init(struct ctl_data &cur)
 {
