@@ -53,5 +53,5 @@ dkms.conf
 .source_file/
 
 #other
-bin/ctrl_server
-.build/
+.bin/*
+.build/*
