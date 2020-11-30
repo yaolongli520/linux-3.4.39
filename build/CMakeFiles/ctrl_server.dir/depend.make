@@ -25,9 +25,20 @@ CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o: ../src/humiture/humiture
 CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o: ../include/ioctrl.h
 CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o: ../src/io_ctrl/ioctrl.cpp
 
+CMakeFiles/ctrl_server.dir/src/lcd/characters.cpp.o: ../include/disk.h
+CMakeFiles/ctrl_server.dir/src/lcd/characters.cpp.o: ../include/freetype2/freetype/config/ftheader.h
+CMakeFiles/ctrl_server.dir/src/lcd/characters.cpp.o: ../include/freetype2/freetype/freetype.h
+CMakeFiles/ctrl_server.dir/src/lcd/characters.cpp.o: ../include/freetype2/ft2build.h
+CMakeFiles/ctrl_server.dir/src/lcd/characters.cpp.o: ../include/lcd.h
+CMakeFiles/ctrl_server.dir/src/lcd/characters.cpp.o: ../src/lcd/characters.cpp
+
 CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o: ../include/disk.h
 CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o: ../include/lcd.h
 CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o: ../src/lcd/lcd.cpp
+
+CMakeFiles/ctrl_server.dir/src/lcd/picture.cpp.o: ../include/disk.h
+CMakeFiles/ctrl_server.dir/src/lcd/picture.cpp.o: ../include/lcd.h
+CMakeFiles/ctrl_server.dir/src/lcd/picture.cpp.o: ../src/lcd/picture.cpp
 
 CMakeFiles/ctrl_server.dir/src/nrf24l01/nrf24l01.cpp.o: ../include/nrf24l01.h
 CMakeFiles/ctrl_server.dir/src/nrf24l01/nrf24l01.cpp.o: ../src/nrf24l01/nrf24l01.cpp

@@ -4,6 +4,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/ctrl_server.dir/src/disk/disk.cpp.o"
   "CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o"
   "CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o"
+  "CMakeFiles/ctrl_server.dir/src/lcd/picture.cpp.o"
+  "CMakeFiles/ctrl_server.dir/src/lcd/characters.cpp.o"
   "CMakeFiles/ctrl_server.dir/src/human/human.cpp.o"
   "CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o"
   "CMakeFiles/ctrl_server.dir/src/nrf24l01/nrf24l01.cpp.o"

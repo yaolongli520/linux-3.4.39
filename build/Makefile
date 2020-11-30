@@ -258,6 +258,33 @@ src/io_ctrl/ioctrl.cpp.s:
 	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.s
 .PHONY : src/io_ctrl/ioctrl.cpp.s
 
+src/lcd/characters.o: src/lcd/characters.cpp.o
+
+.PHONY : src/lcd/characters.o
+
+# target to build an object file
+src/lcd/characters.cpp.o:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/lcd/characters.cpp.o
+.PHONY : src/lcd/characters.cpp.o
+
+src/lcd/characters.i: src/lcd/characters.cpp.i
+
+.PHONY : src/lcd/characters.i
+
+# target to preprocess a source file
+src/lcd/characters.cpp.i:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/lcd/characters.cpp.i
+.PHONY : src/lcd/characters.cpp.i
+
+src/lcd/characters.s: src/lcd/characters.cpp.s
+
+.PHONY : src/lcd/characters.s
+
+# target to generate assembly for a file
+src/lcd/characters.cpp.s:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/lcd/characters.cpp.s
+.PHONY : src/lcd/characters.cpp.s
+
 src/lcd/lcd.o: src/lcd/lcd.cpp.o
 
 .PHONY : src/lcd/lcd.o
@@ -284,6 +311,33 @@ src/lcd/lcd.s: src/lcd/lcd.cpp.s
 src/lcd/lcd.cpp.s:
 	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.s
 .PHONY : src/lcd/lcd.cpp.s
+
+src/lcd/picture.o: src/lcd/picture.cpp.o
+
+.PHONY : src/lcd/picture.o
+
+# target to build an object file
+src/lcd/picture.cpp.o:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/lcd/picture.cpp.o
+.PHONY : src/lcd/picture.cpp.o
+
+src/lcd/picture.i: src/lcd/picture.cpp.i
+
+.PHONY : src/lcd/picture.i
+
+# target to preprocess a source file
+src/lcd/picture.cpp.i:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/lcd/picture.cpp.i
+.PHONY : src/lcd/picture.cpp.i
+
+src/lcd/picture.s: src/lcd/picture.cpp.s
+
+.PHONY : src/lcd/picture.s
+
+# target to generate assembly for a file
+src/lcd/picture.cpp.s:
+	$(MAKE) -f CMakeFiles/ctrl_server.dir/build.make CMakeFiles/ctrl_server.dir/src/lcd/picture.cpp.s
+.PHONY : src/lcd/picture.cpp.s
 
 src/nrf24l01/nrf24l01.o: src/nrf24l01/nrf24l01.cpp.o
 
@@ -346,8 +400,8 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... rebuild_cache"
 	@echo "... ctrl_server"
+	@echo "... rebuild_cache"
 	@echo "... src/core/main.o"
 	@echo "... src/core/main.i"
 	@echo "... src/core/main.s"
@@ -363,9 +417,15 @@ help:
 	@echo "... src/io_ctrl/ioctrl.o"
 	@echo "... src/io_ctrl/ioctrl.i"
 	@echo "... src/io_ctrl/ioctrl.s"
+	@echo "... src/lcd/characters.o"
+	@echo "... src/lcd/characters.i"
+	@echo "... src/lcd/characters.s"
 	@echo "... src/lcd/lcd.o"
 	@echo "... src/lcd/lcd.i"
 	@echo "... src/lcd/lcd.s"
+	@echo "... src/lcd/picture.o"
+	@echo "... src/lcd/picture.i"
+	@echo "... src/lcd/picture.s"
 	@echo "... src/nrf24l01/nrf24l01.o"
 	@echo "... src/nrf24l01/nrf24l01.i"
 	@echo "... src/nrf24l01/nrf24l01.s"

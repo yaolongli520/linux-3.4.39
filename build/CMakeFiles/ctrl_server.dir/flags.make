@@ -6,5 +6,5 @@ CXX_FLAGS =
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/mnt/hgfs/ubuntushare/ctrl_board/include 
+CXX_INCLUDES = -I/mnt/hgfs/ubuntushare/ctrl_board/include -I/mnt/hgfs/ubuntushare/ctrl_board/include/freetype2 -I/mnt/hgfs/ubuntushare/ctrl_board/include/freetype2/freetype 
 

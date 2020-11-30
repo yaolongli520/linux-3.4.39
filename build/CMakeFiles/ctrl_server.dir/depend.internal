@@ -25,10 +25,21 @@ CMakeFiles/ctrl_server.dir/src/humiture/humiture.cpp.o
 CMakeFiles/ctrl_server.dir/src/io_ctrl/ioctrl.cpp.o
  ../include/ioctrl.h
  /mnt/hgfs/ubuntushare/ctrl_board/src/io_ctrl/ioctrl.cpp
+CMakeFiles/ctrl_server.dir/src/lcd/characters.cpp.o
+ ../include/disk.h
+ ../include/freetype2/freetype/config/ftheader.h
+ ../include/freetype2/freetype/freetype.h
+ ../include/freetype2/ft2build.h
+ ../include/lcd.h
+ /mnt/hgfs/ubuntushare/ctrl_board/src/lcd/characters.cpp
 CMakeFiles/ctrl_server.dir/src/lcd/lcd.cpp.o
  ../include/disk.h
  ../include/lcd.h
  /mnt/hgfs/ubuntushare/ctrl_board/src/lcd/lcd.cpp
+CMakeFiles/ctrl_server.dir/src/lcd/picture.cpp.o
+ ../include/disk.h
+ ../include/lcd.h
+ /mnt/hgfs/ubuntushare/ctrl_board/src/lcd/picture.cpp
 CMakeFiles/ctrl_server.dir/src/nrf24l01/nrf24l01.cpp.o
  ../include/nrf24l01.h
  /mnt/hgfs/ubuntushare/ctrl_board/src/nrf24l01/nrf24l01.cpp

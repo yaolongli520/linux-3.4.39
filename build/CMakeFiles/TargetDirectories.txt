@@ -1,3 +1,3 @@
 /mnt/hgfs/ubuntushare/ctrl_board/build/CMakeFiles/edit_cache.dir
-/mnt/hgfs/ubuntushare/ctrl_board/build/CMakeFiles/rebuild_cache.dir
 /mnt/hgfs/ubuntushare/ctrl_board/build/CMakeFiles/ctrl_server.dir
+/mnt/hgfs/ubuntushare/ctrl_board/build/CMakeFiles/rebuild_cache.dir
