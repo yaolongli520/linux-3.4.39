@@ -52,7 +52,5 @@ Mkfile.old
 dkms.conf
 
 #other
-bin/*
-build/*
 source_file
 
