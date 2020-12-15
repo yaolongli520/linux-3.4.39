@@ -681,7 +681,7 @@ static struct i2c_board_info __initdata bmp085_i2c_bdi = {
 };
 #endif
 
-#if defined(CONFIG_RTC_DRV_DS1307_MODULE)
+#if defined(CONFIG_RTC_DRV_DS1307_MODULE) || defined(CONFIG_RTC_DRV_DS1307)
 #define DS1307_I2C_BUS (0)
 
 static struct i2c_board_info __initdata ds1307_i2c_bdi = {
@@ -2071,7 +2071,7 @@ void __init nxp_board_devices_register(void)
 	i2c_register_board_info(BMP085_I2C_BUS, &bmp085_i2c_bdi, 1);
 #endif
 
-#if defined(CONFIG_RTC_DRV_DS1307_MODULE)
+#if defined(CONFIG_RTC_DRV_DS1307_MODULE) || defined(CONFIG_RTC_DRV_DS1307)
 	printk("plat: add ds1307 device\n");
 	i2c_register_board_info(DS1307_I2C_BUS, &ds1307_i2c_bdi, 1);
 #endif
