@@ -54,27 +54,24 @@ int main(int argc,char *argv[])
 
 	ret = nrf24l01_init();
 	if(ret) {
-			cout <<"humiture_init fail\n";
+			cout <<"nrf24l01_init fail\n";
 	}
 
 
-	wchar_t wb_text[] = L"时间:";
 	wchar_t wt_text[] = L"23:16:12";
 
 
 //	backdrop_show_bmp(); //背景bmp显示
 	backdrop_show_jpg(); //背景jpg显示
 	
-	show_free_type(wb_text, 32, 0xf800, 0, 32); //显示字符时间
+
+	init_show_fix_char();
 	lcd_combine_write(); //合并显示
 
 
 
-
 	
-
-	
-
+	/*主线程作为显示*/
 	while(1){
 		hum = hunman_get_satus();
 	//	if(hum == 1) printf("has human \n");
@@ -86,7 +83,7 @@ int main(int argc,char *argv[])
 		val = !val;
 		get_cur_time(TIME_GET_TIME,usr_buf); //获取时间
 		mbstowcs(wt_text, usr_buf, strlen(usr_buf));//转换成宽字符串
-		show_free_type(wt_text, 32, 0x1f, 80, 32);//写入顶层缓存
+		show_free_type(wt_text, 32, 0x1f, 80, 0);//写入顶层缓存
 		lcd_combine_write(); //合并显示
 		sleep(1);
 

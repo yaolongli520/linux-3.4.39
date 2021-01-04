@@ -34,7 +34,10 @@ public:
 	int  tx(uint8_t *buf,uint32_t count);
 	int  rx(uint8_t *buf,uint32_t count);
 	int  find_dev(void);
-	NRF_OPS(){ cout <<"make nrf24l01"<<endl; }
+	NRF_OPS()
+	{ 
+		cout <<__func__ <<" make nrf24l01"<<endl; 
+	}
 	~NRF_OPS()
 	{
 		cout <<"close nrf24l01"<<endl;
@@ -82,8 +85,10 @@ int NRF_OPS::find_dev(void)
 	uint8_t is_find = 0;
 	ioctl(fd,CHECK_DEVICE,&is_find);
 	if(is_find == DEVICE_NO_FIND) {	
-		printf("device is no find \n"); //检查设备是否存在
+		printf("nrf24l01 device is no find \n"); //检查设备是否存在
 		return -1;
+	}else {
+		printf("nrf24l01 device is find \n");
 	}
 	return 0;
 }
@@ -109,7 +114,7 @@ int nrf24l01_init(void)
 	int ret;
 	ret = ops.init(cur_ctl_data);
 	if(ret) 
-		cout <<__func__<< "fail"<<endl;
+		cout <<__func__<< "  fail"<<endl;
 	return ret;
 }
 

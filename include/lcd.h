@@ -25,6 +25,8 @@ int lcd_topview_write(uint8_t *src);
 int backdrop_show_bmp(void); //BMP背景
 int backdrop_show_jpg(void); //JPG背景
 int show_free_type(wchar_t *wtext, int size, PIXEL_TYPE color, int start_x, int start_y);
+int init_show_fix_char(void); //初始化显示固定字体
+
 uint8_t * get_lcd_top_buffer(void);
 
 int lcd_combine_write(void); //合并显示

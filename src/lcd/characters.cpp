@@ -18,6 +18,33 @@
 
 using namespace std;
 
+/*控制某行显示的内容 间隔32 * n */
+enum display_line{
+	CUR_TIME_LINE = 0, 
+	OPEN_TIME_LINE, /*开启时间*/
+	CLOSE_TIME_LINE, /*关闭时间*/
+	CUR_TEMP_LINE, /*温度*/
+	CUR_HUM_LINE, /*湿度*/
+	CUR_WIRE_LINE, /*无线名称*/
+	CUR_TOTAL_LINE, /*总行数*/
+};
+
+struct show_line_ctrl{
+   const wchar_t *desc;
+   int line;
+   int start_data_row;
+};
+
+static struct show_line_ctrl show_line_ctrls[] = {
+  {L"时间:", CUR_TIME_LINE, 3},  /*第3列开始显示时间值*/
+  {L"开灯:", OPEN_TIME_LINE, 3},  /*第3列开始显示时间值*/
+  {L"关灯:", CLOSE_TIME_LINE, 3},  /*第3列开始显示时间值*/
+  {L"温度:", CUR_TEMP_LINE, 3},  /*第3列开始显示温度值*/
+  {L"湿度:", CUR_HUM_LINE, 3},  /*第3列开始显示湿度值*/
+  {L"无线:", CUR_WIRE_LINE, 3},  /*第3列开始显示网络名值*/
+};
+
+
 
 typedef uint32_t PIXEL_TYPE; /*像素点类型*/
 typedef uint16_t PIXEL_TYPE_16; /*像素点类型*/
@@ -70,7 +97,7 @@ FreeTypeOps::FreeTypeOps(int size)
 	printf("%s %d \n",__func__,__LINE__);
 //	ret = get_par("simsun",file_name,sizeof(file_name));
 	if(ret) {
-		printf("par simsun is no find \n");
+	//	printf("par simsun is no find \n");
 	//	return -ERR_FILE_NONE;
 	}
 	
@@ -306,6 +333,23 @@ int show_free_type(wchar_t *wtext, int size, PIXEL_TYPE color, int start_x, int 
 	return ret;
 }
 
+
+/**
+ * init_show_fix_char  初始化显示固定字体
+ *
+ * Return:	0 表示成功
+ */
+int init_show_fix_char(void)
+{
+	int i = 0;
+	for(i = 0; i < CUR_TOTAL_LINE; i++) {
+		const wchar_t *str = show_line_ctrls[i].desc;
+		int row = 32 * show_line_ctrls[i].line;
+		show_free_type((wchar_t *)str, 32, 0xf800, 0, row);
+	}
+	
+	return 0;
+}
 
 
 
