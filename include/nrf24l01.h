@@ -28,6 +28,7 @@ struct ctl_data{
 	uint8_t crc;
 };
 
+int nrf24l01_find_dev(void);
 int nrf24l01_init(void);
 int nrf24l01_tx(uint8_t *buf,uint32_t count);
 uint32_t nrf24l01_rx(uint8_t *buf,uint32_t count);

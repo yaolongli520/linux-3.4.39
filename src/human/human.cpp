@@ -113,7 +113,8 @@ void *hunman_scanf(void *data)
 			cur_data->has_hunman = 1; //有人
 		else if(status == TARGET_NONE)
 			cur_data->has_hunman = 0; //没人	
-		
+
+	//	usleep(100); //可以大大降低CPU负荷
 	}
 
 	close(fd);	

@@ -105,6 +105,18 @@ static struct ctl_data cur_ctl_data = {
 
 
 /**
+ * nrf24l01_find_dev  模块连接检测
+ * Return:	0 检测到设备
+ */
+int nrf24l01_find_dev(void)
+{
+	int ret;
+	ret = ops.find_dev();
+	return ret;
+}
+
+
+/**
  * nrf24l01_init  模块初始化
  * @ctl_data: 初始化模块的控制参数块
  * Return:	
