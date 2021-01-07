@@ -92,7 +92,7 @@ int show_bmp(uint8_t	*data)
 
 	//可以旋转90度显示
 	if(bw == ph && bh == pw) {
-		cout << "Rotation by 90 degrees show"<<endl;
+		pr_warn("Rotation by 90 degrees show\n");
 		rotation_by_90(p , bw, bh); //旋转
 	}
 	
@@ -183,12 +183,12 @@ int show_jpg(uint8_t	*data, unsigned int size)
 
 	//宽	 高	 bpp
 	if(jw!=pw || jh!=ph || jbpp!=pbpp) {
-		cout <<"jw:"<<jw<<" jh"<<jh<<" jbpp"<<jbpp<<endl;
-		cout <<"pw:"<<pw<<" ph"<<ph<<" pbpp"<<pbpp<<endl;
+		pr_warn("jw: jh: jbpp:\n",jw,jh,jbpp);
+		pr_warn("pw: ph: pbpp:\n",pw,ph,pbpp);
 	}	
 
 	if(pw == jh && ph == jw) {
-		cout << "Rotation by 90 degrees show jpg"<<endl;
+		pr_warn("Rotation by 90 degrees show jpg \n");
 	}
 
 	/*读解码数据*/
@@ -272,9 +272,10 @@ int backdrop_show(const char *type)
 	/*获取文件路径*/
 	ret = get_par(pic_type, pic_file, sizeof(pic_file));
 	if(ret == 0) {
-		printf("%s =%s \n",pic_type,(char *)pic_file);
+		pr_init("%s =%s \n",pic_type,(char *)pic_file);
 	}else {
 		return -ERR_PARM_NOT_SET;
+		pr_err("par logo not set\n");
 	}
 
 	pic_fd = open(pic_file,O_RDWR);

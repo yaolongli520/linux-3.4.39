@@ -131,8 +131,6 @@ int humiture_init(void)
 	char val_buf[20] = {0};
 	pthread_t id;
 	
-	printf("TEMP_PATH %d \n",access(TEMP_PATH, F_OK));
-	printf("HUDTY_PATH %d \n",access(HUDTY_PATH, F_OK));
 
 	if(access(TEMP_PATH, F_OK) || access(TEMP_PATH, F_OK)){
 		printf("humiture file is not exit\n");

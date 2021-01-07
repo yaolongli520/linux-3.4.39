@@ -4,12 +4,45 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#define COL(x)  "\033[;" #x "m"
+#define RED     COL(31)
+#define GREEN   COL(32)
+#define YELLOW  COL(33)
+#define BLUE    COL(34)
+#define MAGENTA COL(35)
+#define CYAN    COL(36)
+#define WHITE   COL(0)
+#define GRAY    "\033[0m" /*白色*/
+
+/*错误*/
+#define pr_err(fmt, arg...) do{     \
+    printf(RED"##ERROR: "GRAY RED" [%s:%d]  "fmt GRAY, __func__, __LINE__, ##arg);\
+    fflush(stdout);\
+}while(0)
+
+/*警告*/
+#define pr_warn(fmt, arg...) do{     \
+    printf(BLUE"##WARNING: "GRAY BLUE" [%s:%d]  "fmt GRAY, __func__, __LINE__, ##arg);\
+    fflush(stdout);\
+}while(0)
+
+/*初始化*/
+#define pr_init(fmt, arg...) do{     \
+    printf(GREEN"##INIT: "GRAY GREEN" [%s:%d]  "fmt GRAY, __func__, __LINE__, ##arg);\
+    fflush(stdout);\
+}while(0)
+
+
+
+
 #define ERR_FILE_NONE			2  //文件不存在
 #define ERR_FILE_OPS_INVALID	3  //无效操作
 #define ERR_PARM_NOT_SET 		4  //配置参数未设置
 #define ERR_FILE_NOT_SIZE		5  //文件大小为0
 #define ERR_MALLOC			  	6  //分配空间不足
 
+#define DIV_ROUND_UP(n,d) (((n) + (d) - 1) / (d)) //向上取整除法
+#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 
 #define  PARM_FILE "/usr/config/param.txt"
 

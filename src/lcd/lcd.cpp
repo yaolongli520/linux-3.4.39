@@ -185,7 +185,7 @@ int set_lcd_rotate(int rotate)
 	int rotate_raw = cur_lcd.fbinfo.rotate;
 
 	if(cur_lcd.is_init == false) {
-		printf("%s %d fail\n",__func__,__LINE__);
+		pr_err("fail\n");
 		return -ERR_FILE_NONE;
 	}
 
@@ -273,11 +273,11 @@ int lcd_init(void)
 		ret = get_par("rotate",rotate_buf,sizeof(rotate_buf)); 
 		if(ret < 0){
 			rotate = 0;//使用默认旋转 0
-			printf("par rotate  no set use default rotate:%d \n",rotate);
+			pr_warn("par rotate  no set use default rotate:%d \n",rotate);
 		}else {
 			rotate = atoi(rotate_buf);
 			if(rotate!=0 && rotate!=90 && rotate!=180 && rotate!=270) {
-				printf("par rotate:%d is illegal use 0\n",rotate);
+				pr_warn("par rotate:%d is illegal use 0\n",rotate);
 				rotate = 0;
 			}
 		}

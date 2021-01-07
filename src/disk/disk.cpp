@@ -222,12 +222,12 @@ int find_par_addr(const char *par_name,char **addr)
 	char *p;
 	int par_len;
 	if(par_name == NULL) {
-		printf("par_name is null\n");
+		pr_err("par_name is null\n");
 		return -ERR_FILE_OPS_INVALID;
 	}
 	par_len = strlen(par_name);
 	if(par_len > PARM_LEN_MAX || par_len < 1){
-		printf("par_name is untrue\n");
+		pr_err("par_name is untrue\n");
 		return -ERR_FILE_OPS_INVALID;
 	}
 
@@ -262,13 +262,13 @@ int get_par(const char *par_name,char *buf,int len)
 	}
 	p1 = strchr(par,'"');
 	if(p1 == NULL) {
-		printf("file p1 is INVALID\n");
+		pr_err("file p1 is INVALID\n");
 		return -ERR_FILE_OPS_INVALID;
 	}
 	
 	p2 = strchr(p1+1,'"');
 	if(p2 == NULL) {
-		printf("file p2 is INVALID\n");
+		pr_err("file p2 is INVALID\n");
 		return -ERR_FILE_OPS_INVALID;
 	}
 
@@ -303,13 +303,13 @@ int set_par(const char *par_name,const char *buf,int len)
 	}
 	p1 = strchr(par,'"');
 	if(p1 == NULL) {
-		printf("file p1 is INVALID\n");
+		pr_err("file p1 is INVALID\n");
 		return -ERR_FILE_OPS_INVALID;
 	}
 	
 	p2 = strchr(p1+1,'"');
 	if(p2 == NULL) {
-		printf("file p2 is INVALID\n");
+		pr_err("file p2 is INVALID\n");
 		return -ERR_FILE_OPS_INVALID;
 	}
 
@@ -340,7 +340,7 @@ int file_save_cfgparam(void)
 	fp = fopen(PARM_FILE,"w");
 	
 	if(fp == NULL) {
-		cout <<__func__<<" PARM_FILE not find!"<<endl;
+		pr_err(" PARM_FILE not find!\n");
 		return -ERR_FILE_NONE;
 	}
 	
@@ -366,17 +366,17 @@ int file_get_cfgparam(void)
 	fp = fopen(PARM_FILE,"r");
 	
 	if(fp == NULL) {
-		cout <<__func__<<" PARM_FILE not find!"<<endl;
+		pr_err("PARM_FILE not find!\n");
 		return -ERR_FILE_NONE;
 	}
 
 	cur_parm.par_size = size;
 	cur_parm.par = (uint8_t *)malloc(cur_parm.par_size);
 	if(!cur_parm.par) {
-		cout <<__func__<<" malloc fail!"<<endl;
+		pr_err(" malloc fail!\n");
 		return -1;
 	} else
-		printf("par base address =%p \n",cur_parm.par);
+		pr_init("par base address =%p \n",cur_parm.par);
 	
 	memset(cur_parm.par,0,cur_parm.par_size);
 

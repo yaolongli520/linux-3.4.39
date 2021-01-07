@@ -18,6 +18,8 @@ set (SRC_SERVER
 	${PROJECT_SOURCE_DIR}/src/human/human.cpp  
 	${PROJECT_SOURCE_DIR}/src/humiture/humiture.cpp  
 	${PROJECT_SOURCE_DIR}/src/nrf24l01/nrf24l01.cpp  
+	${PROJECT_SOURCE_DIR}/src/nrf24l01/pack.cpp  
+	${PROJECT_SOURCE_DIR}/src/nrf24l01/list.cpp  
 	${PROJECT_SOURCE_DIR}/src/net/wireless.cpp  
 	${PROJECT_SOURCE_DIR}/src/pthread/pth_net_server.cpp
 	${PROJECT_SOURCE_DIR}/src/pthread/pth_nrf_server.cpp

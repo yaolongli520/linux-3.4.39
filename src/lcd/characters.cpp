@@ -94,7 +94,6 @@ FreeTypeOps::FreeTypeOps(int size)
 	int ret;
 	char file_name[50] = "/usr/data/font/simsun.ttc";
 
-	printf("%s %d \n",__func__,__LINE__);
 //	ret = get_par("simsun",file_name,sizeof(file_name));
 	if(ret) {
 	//	printf("par simsun is no find \n");
@@ -141,7 +140,7 @@ void lcd_draw_point(unsigned int x, unsigned int y, PIXEL_TYPE color, PIXEL_TYPE
 	
 }
 
-#define DIV_ROUND_UP(n,d) (((n) + (d) - 1) / (d)) //向上取整除法
+
 
 
 /*清除这个位图所有格点*/

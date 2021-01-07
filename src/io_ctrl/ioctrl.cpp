@@ -8,10 +8,10 @@
 
 #include <iostream>
 #include "ioctrl.h"
-
+#include "disk.h"
 using namespace std;
 
-#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
+
 
 
 struct io_ctrl {

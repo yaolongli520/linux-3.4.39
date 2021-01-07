@@ -38,8 +38,9 @@ int main(int argc,char *argv[])
 	pthread_t pth_nrfid;
 	pthread_t pth_netid;
 
+
+	pr_init("project ctrl board start\n");
 	
-	cout <<"I am main "<<endl;
 	ret = param_init();
 	if(ret) {
 		cout <<"param_init fail\n";

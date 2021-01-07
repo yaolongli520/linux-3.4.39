@@ -65,6 +65,7 @@ int NRF_OPS::init(struct ctl_data &cur)
 	ioctl(fd,SET_RX_ADDR,cur.rx_addr);//设置本机接收地址
 	ioctl(fd,SET_CHANNEL,&cur.channel);//设置频道 24 ==2.424GHZ
 	ioctl(fd,SET_CRC_MODE,&cur.crc);//设置CRC模式	
+	
 	return NRF_OK;
 }
 
@@ -87,8 +88,6 @@ int NRF_OPS::find_dev(void)
 	if(is_find == DEVICE_NO_FIND) {	
 		printf("nrf24l01 device is no find \n"); //检查设备是否存在
 		return -1;
-	}else {
-		printf("nrf24l01 device is find \n");
 	}
 	return 0;
 }
