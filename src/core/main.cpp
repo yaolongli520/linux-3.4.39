@@ -92,9 +92,9 @@ int main(int argc,char *argv[])
 
 	/*主线程*/
 	while(1){
-		hum = hunman_get_satus();
-	//	if(hum == 1) printf("has human \n");
-	//	else printf("none human \n");
+		hum = get_hunman_status();
+		if(hum == TARGET_EXIST) set_io_val("LCD_BLK",1);
+		else set_io_val("LCD_BLK",0);
 
 	//	set_io_val("IO_BUZZER",val);
 		val = !val;

@@ -23,34 +23,43 @@ struct hunman_data {
 	int fd;
 	char dev_name[30];
 	bool is_init;
-	bool has_hunman;
+	bool has_hunman;			/*人体状态*/
+	int  cur_val;	/*电平状态*/
+	struct timespec timestamp; /*时间戳*/
+	int mod_delay; 			   /*模块时延*/
 };
 
 static struct hunman_data cur_hunman;
 
 
-static  int mod_delay = 9000; /*模块时延*/
 
-enum mod_status{
-	TARGET_NONE = 0,
-	TARGET_EXIST,
-	MACH_SUSPEND,
-};
 	
 
-/**
- * hunman_get_satus  获取人体状态
- *
- * Return:	0 表示成功
- */
 
-int hunman_get_satus(void)
+/**
+ * get_hunman_status  传感器感应状态
+ *
+ * Return:	TARGET_NONE /TARGET_EXIST /MACH_SUSPEND
+ */
+int get_hunman_status(void)
 {
-	if(!cur_hunman.is_init) 
-		return HUM_FAIL;
-	else
-		return cur_hunman.has_hunman;
+	int timeout = 0;
+	struct timespec cur_t, off_t;
+
+	if( (cur_hunman.cur_val == -1) || (!cur_hunman.is_init) ) 			/** 暂停 **/
+		return MACH_SUSPEND; 
+	
+	if(cur_hunman.cur_val == 0) {			/** 下降沿过 mod_delay 后认为无人靠近！！ **/
+		clock_gettime(CLOCK_REALTIME,&cur_t);
+		off_t = get_time_offset(cur_hunman.timestamp, cur_t); 	/**计算时间差**/
+		timeout = get_timeout(off_t, cur_hunman.mod_delay); /** 时间差是否超出设想值 **/	
+		if(timeout == 1)  
+			return  TARGET_NONE;
+	}
+		
+	return  TARGET_EXIST;
 }
+
 
 
 /**
@@ -58,65 +67,29 @@ int hunman_get_satus(void)
  *
  * Return:	0 表示成功
  */
-
 void *hunman_scanf(void *data)
 {
 	struct input_event vEvent;
-	int ret = 0;
-	int status = TARGET_NONE;
-	int val = 0, per_val = 0;
-	struct timespec fall_t, cur_t, off_t;
 	struct hunman_data *cur_data = (struct hunman_data *)data;
 	int fd = cur_data->fd;
 
 	if(!cur_data->is_init) {
-		printf("%s is exit, hunman is not init\n");
+		pr_err("%s is exit, hunman is not init\n");
 		return NULL;
 	}
 	
 	while(1) {
-		if( read(fd, &vEvent, sizeof(vEvent)) > 0)
-		{
-			if(vEvent.code == 0x4)
-			val = vEvent.value;  //状态变化
-		}
 		
-		if(per_val != val) {
-			if(per_val==0 && val ==1) { 	//上升
-				if(status == TARGET_NONE) 
-					printf("Someone is approaching.\n");
-				status = TARGET_EXIST;
+		if( read(fd, &vEvent, sizeof(vEvent)) > 0) {
+			if(vEvent.code == EV_MSC) { 	/*捕捉 EV_MSC 事件*/
+				cur_data->cur_val = vEvent.value; 
+				clock_gettime(CLOCK_REALTIME, &cur_data->timestamp);	/*时间戳保存*/	
 			}
-			else {   		//下降
-				if(status == TARGET_NONE) 
-					printf("this is warning \n"); //下降前是没有??
-				if(status == TARGET_EXIST)
-					clock_gettime(CLOCK_REALTIME, &fall_t);	//记下下降时间		
-			//	printf(" fall_t.tv_sec =%u \n",fall_t.tv_sec);
-			//	printf(" fall_t.tv_nsec =%u \n",fall_t.tv_nsec);
-			}
-			per_val = val;
-		}
-		
-		if(status == TARGET_EXIST && val == 0) {
-			clock_gettime(CLOCK_REALTIME,&cur_t);
-			off_t = get_time_offset(fall_t,cur_t);	
-			if(get_timeout(off_t,mod_delay)) {
-			//	printf(" off_t.tv_sec =%u \n",off_t.tv_sec);
-			//	printf(" off_t.tv_nsec =%u \n",off_t.tv_nsec);
-				printf("The man has left.\n");
-				status = TARGET_NONE;
-			}
-		}
-
-		if(status == TARGET_EXIST)
-			cur_data->has_hunman = 1; //有人
-		else if(status == TARGET_NONE)
-			cur_data->has_hunman = 0; //没人	
-
-	//	usleep(100); //可以大大降低CPU负荷
+		}	
 	}
 
+	pr_err("hunman_scanf is error exit \n");
+	pthread_exit(0);
 	close(fd);	
 	cur_data->is_init = false;
 }
@@ -144,14 +117,16 @@ int human_init(void)
 	strcpy(cur_hunman.dev_name,file_name);
 	sprintf(file_name,"/dev/input/%s",cur_hunman.dev_name);
 
-	fd = open(file_name,O_RDONLY | O_NDELAY);
+	fd = open(file_name,O_RDONLY); /*只读不加 O_NDELAY 非阻塞*/
 	if(fd < 0) {
-		printf("lcd file %s open fail\n",file_name);
+		pr_err("lcd file %s open fail\n",file_name);
 		cur_hunman.is_init = false;
 		return -ERR_FILE_NONE;
 	} else {
 		cur_hunman.fd = fd;
 		cur_hunman.is_init = true;
+		cur_hunman.mod_delay = HUM_MOUDLE_DELAY;	
+		cur_hunman.cur_val = -1;
 	}
 
 	ret = pthread_create(&id, NULL,
