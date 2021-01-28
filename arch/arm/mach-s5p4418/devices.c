@@ -820,9 +820,13 @@ static void spi_init(int ch)
 		req_clk = CFG_SPI0_CLK;
 	else if (1 == ch)
 		req_clk = CFG_SPI1_CLK;
-	else if (2 == ch)
+	else if (2 == ch) {
 		req_clk = CFG_SPI2_CLK;
+	nxp_soc_gpio_set_io_func((PAD_GPIO_C + 12),0x02);
+        nxp_soc_gpio_set_io_func((PAD_GPIO_C + 11),0x02);
+        nxp_soc_gpio_set_io_func((PAD_GPIO_C + 9),0x02);
 
+	}
 	sprintf(name,"nxp-spi.%d",(unsigned char)ch);
 
 	clk = clk_get(NULL,name);
