@@ -116,7 +116,7 @@ int set_io_val(const char *name,int val)
 		c_val = OFF_STR;
 	
 	write(cur_io[i].fd,&c_val,sizeof(c_val));
-	printf("%s val =%d \n",__func__,val);
+//	printf("%s val =%d \n",__func__,val);
 	return 0;
 }
 

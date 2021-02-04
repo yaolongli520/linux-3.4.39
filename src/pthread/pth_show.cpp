@@ -93,7 +93,8 @@ void *pth_show(void *data)
 		}
 		
 		lcd_combine_write(); //合并显示
-		sleep(1);
+		usleep(20000);
+		//sleep(1);
 	}
 }
 

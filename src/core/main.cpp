@@ -24,7 +24,7 @@ using namespace std;
 
 void *pth_show(void *data);
 void *pth_nrf_server(void *data);
-void *pth_net_server(void *data);
+void *pth_net_socket_accept(void *data);
 
 
 
@@ -59,12 +59,12 @@ int main(int argc,char *argv[])
 	if(ret) {
 		cout <<"human_init fail\n";
 	}
-
+#if 1 //引起段错误？
 	ret = humiture_init();
 	if(ret) {
 		cout <<"humiture_init fail\n";
 	}
-
+#endif
 	ret = nrf24l01_init();
 	if(ret) {
 			cout <<"nrf24l01_init fail\n";
@@ -84,7 +84,7 @@ int main(int argc,char *argv[])
 
 	/* 网络线程 */
 	ret = pthread_create(&pth_netid, NULL,
-					   pth_net_server,NULL);
+					   pth_net_socket_accept,NULL);
 	if(ret)
 		printf("pth_net_server is create fail \n");	
 

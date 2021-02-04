@@ -110,7 +110,7 @@ int lcd_combine_write(void)
 	
 	
 	if(cur_lcd.is_init == false) {
-		printf("%s %d fail\n",__func__,__LINE__);
+		pr_err("not inid fail\n");
 		return -ERR_FILE_NONE;
 	}
 
@@ -123,7 +123,9 @@ int lcd_combine_write(void)
 			buf[i] = (p16t[i])?(p16t[i]):(p16b[i]);
 		}
 		lseek(cur_lcd.fd , 0 , SEEK_SET); //文件头
-		write(cur_lcd.fd,buf,sizeof(buf));
+		write(cur_lcd.fd, buf, sizeof(buf));
+	//	write(cur_lcd.fd, p16t, sizeof(buf));//仅写顶层
+	//write(cur_lcd.fd, p16b, sizeof(buf));//仅写底层
 	}else if(bpp == 4) {
 		uint32_t buf[size];
 		p32b = (uint32_t *)cur_lcd.backdrop;

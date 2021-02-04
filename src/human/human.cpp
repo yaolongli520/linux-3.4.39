@@ -45,12 +45,13 @@ int get_hunman_status(void)
 {
 	int timeout = 0;
 	struct timespec cur_t, off_t;
-
-	if( (cur_hunman.cur_val == -1) || (!cur_hunman.is_init) ) 			/** 暂停 **/
-		return MACH_SUSPEND; 
 	
+	/** 暂停 **/
+	if( (cur_hunman.cur_val == -1) || (!cur_hunman.is_init) ) 	
+		return MACH_SUSPEND; 
+
 	if(cur_hunman.cur_val == 0) {			/** 下降沿过 mod_delay 后认为无人靠近！！ **/
-		clock_gettime(CLOCK_REALTIME,&cur_t);
+		clock_gettime(CLOCK_REALTIME, &cur_t);
 		off_t = get_time_offset(cur_hunman.timestamp, cur_t); 	/**计算时间差**/
 		timeout = get_timeout(off_t, cur_hunman.mod_delay); /** 时间差是否超出设想值 **/	
 		if(timeout == 1)  
@@ -114,10 +115,15 @@ int human_init(void)
 		printf("par humdev is no find \n");
 		return -ERR_FILE_NONE;
 	}
+
+	if(strlen(file_name) > sizeof(cur_hunman.dev_name))
+		pr_warn("file_name :%s is too long\n");
+	
 	strcpy(cur_hunman.dev_name,file_name);
+	memset(file_name, 0, sizeof(file_name));
 	sprintf(file_name,"/dev/input/%s",cur_hunman.dev_name);
 
-	fd = open(file_name,O_RDONLY); /*只读不加 O_NDELAY 非阻塞*/
+	fd = open(file_name, O_RDONLY); /*只读不加 O_NDELAY 非阻塞*/
 	if(fd < 0) {
 		pr_err("lcd file %s open fail\n",file_name);
 		cur_hunman.is_init = false;
