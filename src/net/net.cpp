@@ -8,9 +8,93 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <netdb.h>
+#include <ifaddrs.h>
 
 #include "net.h"
 #include "disk.h"
+#include "wireless.h"
+
+/* 
+ * get_host_name 获取主机的名称 eth0 wlan0 ....
+ * return 0
+ */
+int get_host_name(char *host_name)
+{
+	struct ifaddrs *ifAddrStruct = NULL;
+	void *tmpAddrPtr = NULL;
+	getifaddrs(&ifAddrStruct); /*获取接口信息*/
+
+	while (ifAddrStruct != NULL) {
+		 if (ifAddrStruct->ifa_addr->sa_family == AF_INET) { // 检查是否为 IP4
+		 	tmpAddrPtr = &((struct sockaddr_in *)ifAddrStruct->ifa_addr)->sin_addr;
+			strcpy(host_name, ifAddrStruct->ifa_name);
+			return 0;
+		 }
+
+		 ifAddrStruct = ifAddrStruct->ifa_next; 
+	}
+
+	return -1;
+}
+
+
+/* 
+ * get_host_ipaddr 获取主机的IPv4地址
+ * return 0
+ */
+int get_host_ipaddr(char *ipaddr)
+{
+	struct ifaddrs *ifAddrStruct = NULL;
+	void *tmpAddrPtr = NULL;
+	getifaddrs(&ifAddrStruct); /*获取接口信息*/
+	char addressBuffer[INET_ADDRSTRLEN];
+
+	while (ifAddrStruct != NULL) {
+		 if (ifAddrStruct->ifa_addr->sa_family == AF_INET) { // 检查是否为 IP4
+		 	tmpAddrPtr = &((struct sockaddr_in *)ifAddrStruct->ifa_addr)->sin_addr;
+			inet_ntop(AF_INET, tmpAddrPtr, addressBuffer, INET_ADDRSTRLEN);
+			strcpy(ipaddr, addressBuffer);
+			return 0;
+		 }
+
+		 ifAddrStruct = ifAddrStruct->ifa_next; 
+	}
+
+	return -1;
+
+	 
+}
+
+
+/* 
+ * get_wlan_line_name 获取连接的WIFI名字
+ * return 0
+ */
+int get_wlan_line_name(char *name)
+{
+	int ret = 0;
+	char name_buf[200] = { 0 }; 
+	
+	ret = get_net_device_status();
+	if(ret != DEVICE_LINKED) {
+		strcpy(name, "NO");
+	}else {
+		FILE *fpr;
+		char *essid;
+		char *essid_end;
+		fpr = popen("iwconfig wlan0 | grep \"ESSID\"", "r");
+		fread(name_buf, 1, sizeof(name_buf), fpr);
+		essid = strstr(name_buf,"ESSID");
+		essid += 7; //找到无线名起始地址
+		essid_end = strchr(essid,'\"'); //找到无线名结束地址
+		*essid_end = 0;
+		strcpy(name,essid);
+		pclose(fpr);
+	}
+	return 0;
+
+}
+
 
 /**
  * find_first_null_clr_index  查找可用的客户端下标
@@ -65,6 +149,7 @@ NET_OPS::NET_OPS(int port)
 	this->serv_addr.sin_family = AF_INET; /* IPv4 */
 	this->serv_addr.sin_port = htons(p0);  /* set port */
 	this->serv_addr.sin_addr.s_addr = htonl(INADDR_ANY); /*ip addr 监听所有地址*/
+
 
 	/* bind port */
 	if (bind(this->serv_sock, (struct sockaddr *)&this->serv_addr, sizeof(this->serv_addr))) {

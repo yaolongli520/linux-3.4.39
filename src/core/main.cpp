@@ -19,6 +19,8 @@
 #include "humiture.h"
 #include "nrf24l01.h"
 #include "wireless.h"
+#include "cmd_ops.h"
+
 
 using namespace std;
 
@@ -59,16 +61,23 @@ int main(int argc,char *argv[])
 	if(ret) {
 		cout <<"human_init fail\n";
 	}
-#if 1 //引起段错误？
+
 	ret = humiture_init();
 	if(ret) {
 		cout <<"humiture_init fail\n";
 	}
-#endif
+
 	ret = nrf24l01_init();
 	if(ret) {
 			cout <<"nrf24l01_init fail\n";
 	}
+
+	/*命令初始化*/
+	ret = net_cmd_ops_init();
+	if(ret){
+		pr_err("cmd ops  is init fail \n");
+	}
+
 
 	/* 显示线程 */
 	ret = pthread_create(&pth_showid, NULL,
@@ -86,9 +95,9 @@ int main(int argc,char *argv[])
 	ret = pthread_create(&pth_netid, NULL,
 					   pth_net_socket_accept,NULL);
 	if(ret)
-		printf("pth_net_server is create fail \n");	
+		pr_err("pth_net_server is create fail \n");	
 
-	
+
 
 	/*主线程*/
 	while(1){

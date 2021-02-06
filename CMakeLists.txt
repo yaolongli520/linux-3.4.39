@@ -25,6 +25,7 @@ set (SRC_SERVER
 	${PROJECT_SOURCE_DIR}/src/pthread/pth_net_server.cpp
 	${PROJECT_SOURCE_DIR}/src/pthread/pth_nrf_server.cpp
 	${PROJECT_SOURCE_DIR}/src/pthread/pth_show.cpp
+	${PROJECT_SOURCE_DIR}/src/cmd_ops/cmd_ops.cpp
 	)
 
 #指定freetype库路径

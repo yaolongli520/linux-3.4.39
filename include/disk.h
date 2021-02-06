@@ -73,6 +73,12 @@ struct disk_crtl_date{
 	void *buff;
 };
 
+/*控制参数的长度范围*/
+struct par_crtl {
+	const char *par_name;
+	uint8_t par_len_min;
+	uint8_t par_len_max;
+};
 
 
 int open_file(struct disk_crtl_date *date);
@@ -86,6 +92,8 @@ int param_init(void);
 int file_save_cfgparam(void);
 int set_par(const char *par_name,const char *buf,int len);
 int get_par(const char *par_name,char *buf,int len);
+int check_par_len(const char *par_name, char *par); //检查设置参数是否合法
+int check_par_time(char *par); //检查时间是否合法
 
 
 

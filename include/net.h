@@ -33,6 +33,9 @@ public:
 
 int find_first_null_clr_index(NET_OPS &ops);
 int set_clr_index_null(NET_OPS *ops, int index);
+int get_host_name(char *host_name);
+int get_host_ipaddr(char *ipaddr);
+int get_wlan_line_name(char *name);
 
 
 

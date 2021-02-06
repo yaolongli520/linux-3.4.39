@@ -20,6 +20,7 @@
 #include "nrf24l01.h"
 #include "wireless.h"
 #include "net.h"
+#include "cmd_ops.h"
 
 using namespace std;
 
@@ -45,7 +46,8 @@ void *pth_net_server(void *data)
 	int clnt_sock = -1;
 	struct pht_server_data *server_data = (struct pht_server_data *)data;
 	struct sockaddr_in *cli_addr;
-	char buf[NET_BUFFER_COUNT];
+	uint8_t cmd_buf[NET_BUFFER_COUNT], rep_buf[NET_BUFFER_COUNT];
+	struct cmd_ops_str *cmd_str = net_cmd_ops_str_get();
 
 	index = server_data->index;
 	cli_addr = &server_data->ops->clnt_addr[index];
@@ -56,17 +58,29 @@ void *pth_net_server(void *data)
 	
 	while(1)
 	{
+		struct cmd_data cmd = { 0 }, rep = { 0 };
 		
-		memset(buf, 0, NET_BUFFER_COUNT);
-		ret = read(clnt_sock, buf, sizeof(buf));
-		if(ret > 0) {
-			printf("[%s:%d]:%s \n",inet_ntoa(cli_addr->sin_addr),ntohs(cli_addr->sin_port),buf);
-			write(clnt_sock, buf, strlen(buf));
-		}else if(ret == 0) {
-			pr_warn("index:%d cli is exit\n",index);
+		memset(cmd_buf, 0, NET_BUFFER_COUNT);
+		memset(rep_buf, 0, NET_BUFFER_COUNT);
+		ret = read(clnt_sock, cmd_buf, sizeof(cmd_buf));
+		/* cli is exit or error*/
+		if(ret <= 0) {
+			pr_warn("index:%d cli is exit ret=%d \n", index, ret);
 			break;
 		}
-		sleep(1);	
+		
+		cmd.data = cmd_buf;
+		cmd.len = sizeof(cmd_buf);
+		rep.data = rep_buf;
+		rep.len = sizeof(rep_buf);
+		cmd_str->cmd_ops(&cmd, &rep);
+
+	/*打印客户端 IP端口*/
+	//	printf("[%s:%d]:%s \n",inet_ntoa(cli_addr->sin_addr),ntohs(cli_addr->sin_port),cmd_buf);
+		/*如需要响应*/
+		if(rep.len > 0)
+			write(clnt_sock, rep_buf, rep.len);
+		
 	}
 
 	close(clnt_sock); /*close socket*/
@@ -87,11 +101,23 @@ void *pth_net_socket_accept(void *data)
 	NET_OPS net_ops(1234); /* define net class */
 	pthread_t pth_nrfid[NET_PORT_MAX];
 	struct pht_server_data *server_data;
+	char host_name[30] = {0};
+	char host_ip[30] = {0};
 	
 	if(net_ops.serv_sock < 0) {
 		pr_err("net init is fail \n");
 		pthread_exit(0);
 	}
+
+	
+	ret = get_host_name(host_name);
+	if(ret == 0)
+		pr_init("host_name = %s \n",host_name);
+	
+	ret = get_host_ipaddr(host_ip);
+	if(ret == 0)
+		pr_init("host_ip = %s \n",host_ip);
+
 
 	while(1)
 	{

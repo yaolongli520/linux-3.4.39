@@ -15,7 +15,73 @@ struct parm {
 };
 
 
+
+
 static struct parm cur_parm;
+
+/*控制参数的长度范围 :这里参数可能不保存在文件中*/
+static struct par_crtl cur_par_crtl[] = {
+	{"opening_time", 8, 8},
+	{"closeing_time", 8, 8},
+	{"beijingtime",	8 , 8}
+};
+
+int check_par_len(const char *par_name, char *par)
+{
+	int i = 0;
+	int par_len = strlen(par);
+	int len_max, len_min;
+	
+	/*查找是否存在参数长度限制*/
+	for(i = 0; i < ARRAY_SIZE(cur_par_crtl); i++) {
+		if(strcmp(par_name,cur_par_crtl[i].par_name) == 0) 
+			break;
+	}
+
+	/*不存在限制 直接返回*/
+	if(i == ARRAY_SIZE(cur_par_crtl))
+		return 0;
+
+	len_max = cur_par_crtl[i].par_len_max;
+	len_min = cur_par_crtl[i].par_len_min;
+	
+	if((par_len < len_min) || (par_len > len_max)) {
+		pr_err("par should be %d ~ %d ,cur is %d \n",len_min, len_max, par_len);
+		return -1;
+	}
+	return 0;
+
+}
+
+
+int check_par_time(char *par)
+{
+	int h = 0, m = 0, s = 0;
+
+	if((par[2] != ':') || (par[5] != ':')) {
+		pr_err("time format is fail :%s \n",par);
+		return 1;
+	}
+
+	sscanf(par,"%d:%d:%d",&h, &m, &s);
+	if(h < 0 || h > 23) {
+		pr_err("h =%d need 0~23 \n", h);
+		return 1;
+	}
+
+	if(m < 0 || m > 59) {
+		pr_err("m =%d need 0~59 \n", m);
+		return 1;
+	}
+
+	if(s < 0 || s > 59) {
+		pr_err("s =%d need 0~59 \n", s);
+		return 1;
+	}	
+
+	return 0;
+}
+
 
 /**
  * get_file_size  获取文件的大小

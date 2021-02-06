@@ -7,6 +7,7 @@
 
 
 #include "mytime.h"
+#include "disk.h"
 
 using namespace std;
 
@@ -83,10 +84,10 @@ int set_time_time(char *t)
 	sscanf(t,"%d:%d:%d",&h,&m,&s); //提取时分秒
 
 	//修改时分秒
-	loctime->tm_sec = h;         
+	loctime->tm_sec = s;         
     loctime->tm_min = m;         
-    loctime->tm_hour = s;      
-	
+    loctime->tm_hour = h;      
+
 	tv.tv_sec =  mktime(loctime); //将时间转为秒格式
 	
     settimeofday(&tv,NULL); //设置
